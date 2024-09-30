@@ -1,5 +1,5 @@
 async function search(query) {
-    const url = `https://test.cors.workers.dev/?https://frogfind.com/?q=${encodeURIComponent(query)}`;
+    const url = `https://test.cors.workers.dev/?${encodeURIComponent("https://frogfind.com/?q="+query)}`;
     
     try {
         const response = await fetch(url);
