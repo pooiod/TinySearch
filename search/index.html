@@ -154,13 +154,20 @@
 
     const buttonsJson = [
         { 
+            name: "Google", link: "https://google.com/search?q=%s", 
+            regex: null,
+            tags: [],
+            alwaysShow: true
+        },
+        { 
             name: "Scratch search", link: "https://scratch.mit.edu/search/projects?q=%s", 
             regex: /(\bin scratch\b|\bon scratch\b)/gi,
             tags: [
                 "scratch",
                 "project",
                 "coding"
-            ]
+            ],
+            alwaysShow: false
         }
     ];
 
@@ -225,7 +232,7 @@
 
         buttonsJson.forEach(button => {
             const matches = button.tags.some(tag => queryWords.includes(tag));
-            if (matches) {
+            if (matches || button.alwaysShow) {
                 const buttonElement = document.createElement("button");
                 buttonElement.textContent = button.name;
                 buttonElement.onclick = () => {
