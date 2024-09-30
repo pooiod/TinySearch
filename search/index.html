@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://pooiod7.neocities.org/snips/GenerativeAI.js"></script>
     <style>
+        /* Default (light mode) */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f0f2f5;
@@ -19,124 +20,73 @@
         }
         header {
             background-color: #ffffff;
-            display: flex;
-            /* justify-content: space-between; */
-            padding: 10px 20px;
-            align-items: center;
             border-bottom: 1px solid #e0e0e0;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        #search-bar {
-            display: flex;
-            align-items: center;
-            width: 80%;
         }
         input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
             border: 1px solid #ccc;
-            outline: none;
-            font-size: 16px;
-            autocomplete: "off";
         }
         button {
             background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        #icon {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 0px;
-            margin-right: 15px;
-            padding: 0px;
-        }
-        .results-container {
-            padding: 0;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .search-type-tabs {
-            display: flex;
-            margin-top: 3px;
-            margin-bottom: 10px;
-            padding: 10px 20px;
-            border-bottom: 1px solid #e0e0e0;
         }
         .search-type-tabs button {
             background-color: #e8f0fe;
             border: 1px solid #d3d3d3;
             color: #1a0dab;
-            padding: 8px 12px;
-            margin-right: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .search-type-tabs .noclickbutton {
-            background-color: #e8f0fe;
-            border: 1px solid #d3d3d3;
-            color: #000000;
-            cursor: default;
-        }
-        .search-type-tabs button.show {
-            opacity: 1;
-            transform: translateY(0);
         }
         .quick-answer {
             background-color: #f9f9f9;
             border: 1px solid #d3d3d3;
-            border-radius: 4px;
-            padding: 10px;
-            font-size: 16px;
             color: #333;
-            margin: 0 20px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
         }
         .card {
             background-color: white;
-            border-radius: 4px 8px 8px 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 15px 20px;
-            padding: 15px;
             border-left: 4px solid #1a73e8;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .card.show {
-            opacity: 1;
-            transform: translateY(0);
         }
         .card h3 {
-            margin: 0;
-            font-size: 18px;
             color: #1a0dab;
         }
-        .card p {
-            font-size: 14px;
+        .card p, .card a {
             color: #4d5156;
         }
-        .card a {
-            color: #1a0dab;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .card a:hover {
-            text-decoration: underline;
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #222;
+                color: #e0e0e0;
+            }
+            header {
+                background-color: #1f1f1f;
+                border-bottom: 1px solid #333;
+            }
+            input[type="text"] {
+                background-color: #333;
+                color: #e0e0e0;
+                border: 1px solid #555;
+            }
+            button {
+                background-color: #1a73e8;
+            }
+            .search-type-tabs button {
+                background-color: #333;
+                border: 1px solid #555;
+                color: #e0e0e0;
+            }
+            .quick-answer {
+                background-color: #1f1f1f;
+                border: 1px solid #333;
+                color: #e0e0e0;
+            }
+            .card {
+                background-color: #1f1f1f;
+                border-left: 4px solid #1a73e8;
+            }
+            .card h3 {
+                color: #8ab4f8;
+            }
+            .card p, .card a {
+                color: #b0b0b0;
+            }
         }
     </style>
 </head>
