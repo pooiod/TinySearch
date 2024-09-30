@@ -78,6 +78,19 @@
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
+        .search-type-tabs button .selected {
+            background-color: #d3dae8;
+            border: 1px solid #d3d3d3;
+            color: #1a0dab;
+            padding: 8px 12px;
+            margin-right: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
         .search-type-tabs button.show {
             opacity: 1;
             transform: translateY(0);
@@ -141,10 +154,9 @@
 </header>
 
 <div class="search-type-tabs" id="search-tabs">
-    <button onclick="window.location.href='/web'">Web</button>
+    <button onclick="window.location.href='/search'" class="selected">Web</button>
     <button onclick="window.location.href='/images'">Images</button>
     <button onclick="window.location.href='/videos'">Videos</button>
-    <button onclick="window.location.href='/news'">News</button>
 </div>
 
 <div class="results-container">
@@ -192,7 +204,7 @@
 
     function redirectToSearch() {
         const query = document.getElementById('search-input').value.trim();
-        window.location.href = `/?q=${encodeURIComponent(query)}`;
+        window.location.href = `?q=${encodeURIComponent(query)}`;
     }
 
     function animateHeaderAndTabs() {
