@@ -9,8 +9,10 @@ async function search(query) {
         const results = Array.from(doc.querySelectorAll('a')).map(link => {
             const titleElement = link.querySelector('font[size="4"]');
             const title = titleElement ? titleElement.textContent : '';
-            const url = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
-            const descriptionElement = link.nextElementSibling?.nextElementSibling; // Accessing the next sibling's next sibling
+            const rawUrl = link.getAttribute('href') || '';
+            const url = rawUrl.replace('/read.php?a=', '');
+
+            const descriptionElement = link.parentElement?.nextElementSibling; // Get the parent and then the next sibling
             const description = descriptionElement ? descriptionElement.textContent.trim() : '';
 
             return { title, url, description };
