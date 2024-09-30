@@ -7,6 +7,7 @@
     <title>Search Results</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://pooiod7.neocities.org/snips/GenerativeAI.js"></script>
+    <script src="/util/searchweb.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -177,10 +178,13 @@
             window.location.href = '/';
             return;
         }
-        displayQuickAnswer(`This is a quick answer to your search query about "${query}".`);
-        addCard(`Example Search Result 1 for "${query}"`, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor nunc quis sapien.", "example.com", "https://example.com");
-        addCard(`Example Search Result 2 for "${query}"`, "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.", "example.com", "https://example.com");
-        addCard(`Example Search Result 3 for "${query}"`, "Ut lacinia, est vitae consequat hendrerit, nunc orci dignissim metus, at fermentum dolor lorem non odio.", "example.com", "https://example.com");
+        displayQuickAnswer(`Scraping results...`);
+        search(query).then(results => {
+            results.forEach(result => {
+                addCard(result.title, result.description, result.url, result.url);
+            });
+        });
+        // addCard(`title`, "desc", "domain", "url");
     }
 
     function displayQuickAnswer(answer) {
