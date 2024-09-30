@@ -154,9 +154,9 @@
 </header>
 
 <div class="search-type-tabs" id="search-tabs">
-    <button onclick="window.location.href='/search'" class="selected">Web</button>
-    <button onclick="window.location.href='/images'">Images</button>
-    <button onclick="window.location.href='/videos'">Videos</button>
+    <button onclick="window.location.href='/search?q='+window.location.search.getQueryParameter('q')" class="selected">Web</button>
+    <button onclick="window.location.href='/images?q='+window.location.search.getQueryParameter('q')">Images</button>
+    <button onclick="window.location.href='/videos?q='+window.location.search.getQueryParameter('q')">Videos</button>
 </div>
 
 <div class="results-container">
