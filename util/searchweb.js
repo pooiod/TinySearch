@@ -1,37 +1,17 @@
 async function search(query) {
-    const url = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q="+query)}`;
-    
+    const url = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
     try {
         const response = await fetch(url);
-        const data = await response.text();
-
-        console.log(data);
-        
-        const results = parseFrogFindResults(data);
-
-        console.log(results);
-
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+        const results = Array.from(doc.querySelectorAll('a')).map(link => ({
+            title: link.querySelector('font[size="4"]').textContent,
+            url: link.getAttribute('href'),
+            description: link.nextElementSibling.textContent.trim()
+        })).filter(result => result.title);
         return results;
     } catch (error) {
-        console.error('Error fetching results:', error);
-        return null;
+        console.error('Error fetching search results:', error);
     }
-}
-
-function parseFrogFindResults(html) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const results = [];
-    
-    const links = doc.querySelectorAll('a[href^="/read.php?a="]');
-    
-    links.forEach(link => {
-        const title = link.querySelector('font[size="4"]').innerText;
-        const url = link.getAttribute('href').replace('/read.php?a=', '');
-        const description = link.parentElement.nextElementSibling.innerText || '';
-
-        results.push({ title, url, description });
-    });
-
-    return results;
 }
