@@ -307,6 +307,9 @@
                 tab.classList.add('show');
             }, index * 50); // Delay each tab by 50ms
         });
+        if (!tabs) {
+            searchTabs.style.display = "none";
+        }
     }
 
     window.onload = () => {
