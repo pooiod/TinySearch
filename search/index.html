@@ -483,7 +483,7 @@
                 try {
                     const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`);
                     if (!metaResponse.ok) { console.warn("rate limited");
-                        addCard(link.title, metaData.description, link.url, link.url, metaData.image);
+                        addCard(link.title, "", link.url, link.url, "");
                         results.push({
                             title: link.title,
                             url: link.url,
@@ -506,7 +506,7 @@
                         image: metaData.image || ''
                     });
                 } catch (metaError) {
-                    addCard(link.title, metaData.description, link.url, link.url, metaData.image);
+                    addCard(link.title, "", link.url, link.url, "");
                     results.push({
                         title: link.title,
                         url: link.url,
