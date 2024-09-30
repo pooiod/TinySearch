@@ -329,6 +329,10 @@
     }
 
     function addCard(title, description, link, fullurl, image) {
+        if (fullurl == "/") {
+            return;
+        }
+        
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
 
@@ -510,7 +514,7 @@
                     });
                 } catch (metaError) {
                     addCard(link.title, "", link.url, link.url, "");
-                    
+
                     await new Promise(resolve => setTimeout(resolve, 900));
 
                     results.push({
