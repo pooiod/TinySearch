@@ -19,7 +19,7 @@
         header {
             background-color: #ffffff;
             display: flex;
-            justify-content: space-between;
+            /* justify-content: space-between; */
             padding: 10px 20px;
             align-items: center;
             border-bottom: 1px solid #e0e0e0;
@@ -139,13 +139,13 @@
 <body>
 
 <header id="header">
+    <button id="icon" onclick="window.location.href='/'"></button>
+        <img src="/FreeSearchIcon.png" alt="Home" width="30px">
+    </button>
     <div id="search-bar">
         <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
         <button onclick="redirectToSearch()">Search</button>
     </div>
-    <button id="icon" onclick="window.location.href='/'"></button>
-        <img src="/FreeSearchIcon.png" alt="Home" width="30px">
-    </button>
 </header>
 
 <div id="loader" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; transition: opacity 0.3s ease; opacity: 0;">
