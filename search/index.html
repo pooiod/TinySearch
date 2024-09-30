@@ -186,7 +186,9 @@
             if (results.length == 0) {
                 displayQuickAnswer(`No results found`);
             } else {
-                displayQuickAnswer(`yay`);
+                gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. You may not list your name, or that you are a bot, just answer based on the results.`, "gpt-4o");
+                gpt.inform("Search results: " + JSON.stringify(results));
+                gpt.prompt(query).then(displayQuickAnswer);
             }
         });
         // addCard(`title`, "desc", "domain", "url");
