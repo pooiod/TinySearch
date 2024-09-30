@@ -339,9 +339,9 @@
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
 
-        var img = `<img src="${image}" style="width: 10px; height: 10px;">`;
+        var img = `<img src="${image}" style="width: 20px; height: 20px;">`;
         if (!title) {
-            img = `<img src="${image}" style="width:50%; height: auto;">`;
+            img = `<img src="${image}" style="max-width:80%; height: auto;">`;
         }
 
         const resultsDiv = document.getElementById('results');
