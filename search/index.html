@@ -153,7 +153,7 @@
 </div>
 
 <script>
-    let cardIndex = 0;
+    let cardIndex = 1;
 
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -166,7 +166,6 @@
             return;
         }
         displayQuickAnswer(`This is a quick answer to your search query about "${query}".`);
-        cardIndex = 0; // Reset the card index for new searches
         addCard(`Example Search Result 1 for "${query}"`, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor nunc quis sapien.", "example.com");
         addCard(`Example Search Result 2 for "${query}"`, "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.", "example.com");
         addCard(`Example Search Result 3 for "${query}"`, "Ut lacinia, est vitae consequat hendrerit, nunc orci dignissim metus, at fermentum dolor lorem non odio.", "example.com");
