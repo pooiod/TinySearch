@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Page</title>
+    <title>Free Search</title>
     <style>
         body {
             display: flex;
@@ -83,7 +84,7 @@
 <body>
     <div class="container">
         <h1>What would you like to find today?</h1>
-        <form action="/search?engine=default" method="get">
+        <form action="/search" method="get">
             <input type="text" name="q" placeholder="Search..." required>
             <input type="submit" value="Search">
         </form>
