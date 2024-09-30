@@ -183,7 +183,7 @@
             results.forEach(result => {
                 addCard(result.title, result.description, result.url, result.url);
             });
-            if (!results) {
+            if (results.length == 0) {
                 displayQuickAnswer(`No results found`);
             } else {
                 displayQuickAnswer(`yay`);
