@@ -194,11 +194,6 @@
     }
 
     function performSearch(query) {
-        if (!query) {
-            window.location.href = '/';
-            return;
-        }
-
         document.getElementById("loader").style.opacity = 1;
 
         search(query).then(results => {
@@ -217,7 +212,6 @@
                 gpt.prompt(query).then(displayQuickAnswer);
             }
         });
-        // addCard(`title`, "desc", "domain", "url");
     }
 
     function displayQuickAnswer(answer, basic) {
@@ -295,10 +289,18 @@
     window.onload = () => {
         const query = getQueryParameter('q');
         document.getElementById('search-input').value = query || '';
+
+        if (!query) {
+            window.location.href = '/';
+            return;
+        }
+
         animateHeaderAndTabs(document.getElementById('search-input').value);
+        
         setTimeout(function(){
             performSearch(query);
         }, 300);
+
         document.getElementById('search-input').addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 redirectToSearch();
