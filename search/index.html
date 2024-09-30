@@ -339,7 +339,7 @@
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
 
-        var img = `<img src="${image}" style="width: 15px; height: 15px; margin-top: 3px;">`;
+        var img = `<img src="${image}" style="width: 15px; max-height: 40px;  height: 15px;">`;
         if (!title) {
             img = `<img src="${image}" style="max-width:80%; height: auto; max-height: 40vh;">`;
         }
