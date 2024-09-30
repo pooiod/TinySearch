@@ -254,7 +254,7 @@
             results.forEach(result => {
                 addCard(result.title, result.description, result.url, result.url);
             });
-            
+
             if (results.length == 0) {
                 displayQuickAnswer(`No results found`);
                 document.getElementById("loader").style.opacity = 0;
@@ -392,14 +392,14 @@
         const response = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`);
         const data = await response.json();
 
-        search2(query);
+        searchBackground(query);
         
         const results = data.RelatedTopics.map(topic => {
             return {
-                title: topic.Text || topic.Result,
+                title: topic.Heading || topic.text,
                 url: topic.FirstURL || '',
                 description: data.Abstract || '',
-                image: topic.Icon?.URL || ''
+                image: "https://www.google.com/s2/favicons?domain=" + topic.FirstURL
             };
         });
 
@@ -408,7 +408,7 @@
         return results;
     }
 
-    async function search2(query) {
+    async function searchBackground(query) {
         const searchUrl = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
 
         try {
