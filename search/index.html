@@ -323,9 +323,9 @@
     function displayQuickAnswer(answer, basic) {
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.display = 'block';
-        quickAnswerDiv.style.transform = 'translateY(0)';
         quickAnswerDiv.innerHTML = `${!basic?"<strong>Quick Answer:</strong> ":""}${answer}`;
         setTimeout(function(){
+            quickAnswerDiv.style.transform = 'translateY(0)';
             quickAnswerDiv.style.opacity = '1';
         }, 100);
     }
