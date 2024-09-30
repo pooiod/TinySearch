@@ -7,18 +7,25 @@ async function search(query) {
         const doc = parser.parseFromString(text, "text/html");
 
         const results = Array.from(doc.querySelectorAll('a')).map(link => {
-            const titleElement = link.querySelector('font[size="4"]');
-            const title = titleElement ? titleElement.textContent : '';
-            const rawUrl = link.getAttribute('href') || '';
-            const url = rawUrl.replace('/read.php?a=', '');
+            const targetUrl = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
+            return fetch(targetUrl)
+                .then(res => res.text())
+                .then(pageText => {
+                    const pageDoc = new DOMParser().parseFromString(pageText, "text/html");
+                    const metaTitle = pageDoc.querySelector('meta[property="og:title"]')?.content || pageDoc.title || '';
+                    const metaDescription = pageDoc.querySelector('meta[property="og:description"]')?.content || pageDoc.querySelector('meta[name="description"]')?.content || '';
+                    const metaImage = pageDoc.querySelector('meta[property="og:image"]')?.content || '';
+                    const metaUrl = targetUrl;
 
-            const descriptionElement = link.parentElement?.nextElementSibling; // Get the parent and then the next sibling
-            const description = descriptionElement ? descriptionElement.textContent.trim() : '';
+                    return { title: metaTitle, description: metaDescription, image: metaImage, url: metaUrl };
+                })
+                .catch(error => {
+                    console.error('Error fetching target page:', error);
+                    return { title: '', description: '', image: '', url: targetUrl }; // Return blank values on error
+                });
+        });
 
-            return { title, url, description };
-        }).filter(result => result.title || result.description);
-
-        return results;
+        return Promise.all(results);
     } catch (error) {
         console.error('Error fetching search results:', error);
         return [];
