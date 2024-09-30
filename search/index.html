@@ -360,7 +360,7 @@
                 try {
                     const metaResponse = await fetch("https://test.cors.workers.dev/?"+encodeURIComponent(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`));
                     if (!metaResponse.ok) {
-                        console.warn(`Meta fetch failed for ${link.url}: ${metaResponse.status}`);
+                        // console.warn(`Meta fetch failed for ${link.url}: ${metaResponse.status}`);
                         return null;
                     }
 
@@ -373,7 +373,7 @@
                         poweredBy: metaData.poweredBy || ''
                     };
                 } catch (metaError) {
-                    console.error(`Error fetching meta data for ${link.url}: ${metaError}`);
+                    // console.error(`Error fetching meta data for ${link.url}: ${metaError}`);
                     return null;
                 }
             }));
