@@ -272,7 +272,7 @@
     function addCard(title, description, link, fullurl, image) {
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
-        
+
         const resultsDiv = document.getElementById('results');
         const card = document.createElement('div');
         card.className = 'card';
@@ -350,7 +350,7 @@
         tabs.forEach((tab, index) => {
             setTimeout(() => {
                 tab.classList.add('show');
-            }, index * 5);
+            }, index * 50);
         });
         if (tabs.length == 1) {
             searchTabs.style.display = "none";
