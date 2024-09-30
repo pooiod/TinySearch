@@ -181,7 +181,7 @@
         displayQuickAnswer(`Scraping results...`);
         search(query).then(results => {
             results.forEach(result => {
-                addCard(result.title, result.description, result.url, result.url);
+                addCard(result.title, result.description, result.domain, result.url);
             });
             displayQuickAnswer(`yay`);
         });

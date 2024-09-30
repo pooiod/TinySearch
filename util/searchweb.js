@@ -30,6 +30,3 @@ function parseFrogFindResults(html) {
 
     return results;
 }
-
-// Example usage:
-search('google').then(results => console.log(results));
