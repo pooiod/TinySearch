@@ -8,6 +8,7 @@ FreeSearch is a lightweight, dynamic search engine built on DuckDuckGo's API. It
 - **Minimalist Design:** Simple, clutter-free interface for quick searches.
 - **Animated UI:** Smooth and dynamic animations for an engaging experience.
 - **Privacy First:** No tracking, ads, or data collection.
+- **Client Side:** Made using public apis and client side javascript.
 
 ### Usage:
 Just type your query into the search bar and let FreeSearch handle the rest.
