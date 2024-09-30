@@ -103,6 +103,7 @@
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
+        
         #search-bar {
             display: flex;
             align-items: center;
@@ -117,6 +118,7 @@
             font-size: 16px;
             autocomplete: "off";
         }
+
         button {
             background-color: #4CAF50;
             color: white;
@@ -126,6 +128,7 @@
             border-radius: 10px;
             cursor: pointer;
         }
+
         #icon {
             background: none;
             border: none;
@@ -134,11 +137,13 @@
             margin-right: 15px;
             padding: 0px;
         }
+
         .results-container {
             padding: 0;
             max-width: 900px;
             margin: 0 auto;
         }
+
         .search-type-tabs {
             display: flex;
             margin-top: 3px;
@@ -146,6 +151,7 @@
             padding: 10px 20px;
             border-bottom: 1px solid #e0e0e0;
         }
+
         .search-type-tabs button {
             background-color: #e8f0fe;
             border: 1px solid #d3d3d3;
@@ -169,6 +175,7 @@
             opacity: 1;
             transform: translateY(0);
         }
+
         .quick-answer {
             background-color: #f9f9f9;
             border: 1px solid #d3d3d3;
@@ -181,6 +188,7 @@
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
+
         .card {
             background-color: white;
             border-radius: 4px 8px 8px 4px;
@@ -219,18 +227,22 @@
                 background-color: #222;
                 color: #e0e0e0;
             }
+
             header {
                 background-color: #1f1f1f;
                 border-bottom: 1px solid #333 !important;
             }
+
             input[type="text"] {
                 background-color: #333;
                 color: #e0e0e0;
                 border: 1px solid #555;
             }
+
             button {
                 background-color: #1a73e8;
             }
+
             .search-type-tabs {
                 border-bottom: 1px solid #333 !important;
             }
@@ -239,11 +251,13 @@
                 border: 1px solid #555;
                 color: #e0e0e0;
             }
+
             .quick-answer {
                 background-color: #1f1f1f;
                 border: 1px solid #333;
                 color: #e0e0e0;
             }
+
             .card {
                 background-color: #1f1f1f;
                 border-left: 4px solid #1a73e8;
@@ -253,6 +267,23 @@
             }
             .card p, .card a {
                 color: #b0b0b0;
+            }
+
+            @-moz-document url-prefix() {
+                * {
+                    scrollbar-color: #ebebeb #383838;
+                }
+            }
+            *::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            *::-webkit-scrollbar-track {
+                background: #383838;
+            }
+
+            *::-webkit-scrollbar-thumb {
+                background-color: #ebebeb;
             }
         }
     </style>
