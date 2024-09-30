@@ -490,12 +490,12 @@
 
                         await new Promise(resolve => setTimeout(resolve, 900));
 
-                        addCard(link.title, "", link.url, link.url, "");
+                        addCard(link.title, "", link.url, link.url, "https://www.google.com/s2/favicons?domain="+link.url);
                         results.push({
                             title: link.title,
                             url: link.url,
                             description: '',
-                            image: ''
+                            image: "https://www.google.com/s2/favicons?domain="+link.url
                         });
                         continue
                     };
@@ -513,7 +513,7 @@
                         image: metaData.image || ''
                     });
                 } catch (metaError) {
-                    addCard(link.title, "", link.url, link.url, "");
+                    addCard(link.title, "", link.url, link.url, "https://www.google.com/s2/favicons?domain="+link.url);
 
                     await new Promise(resolve => setTimeout(resolve, 900));
 
@@ -521,7 +521,7 @@
                         title: link.title,
                         url: link.url,
                         description: '',
-                        image: ''
+                        image: "https://www.google.com/s2/favicons?domain="+link.url
                     });
                 }
             }
