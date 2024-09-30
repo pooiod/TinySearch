@@ -178,7 +178,7 @@
             window.location.href = '/';
             return;
         }
-        displayQuickAnswer(`Scraping results...`);
+        displayQuickAnswer(`Scraping results...`, true);
         search(query).then(results => {
             results.forEach(result => {
                 addCard(result.title, result.description, result.url, result.url);
@@ -194,11 +194,11 @@
         // addCard(`title`, "desc", "domain", "url");
     }
 
-    function displayQuickAnswer(answer) {
+    function displayQuickAnswer(answer, basic) {
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.opacity = '1';
         quickAnswerDiv.style.transform = 'translateY(0)';
-        quickAnswerDiv.innerHTML = `<strong>Quick Answer:</strong> ${answer}`;
+        quickAnswerDiv.innerHTML = `${!basic?"<strong>Quick Answer:</strong> ":""}${answer}`;
     }
 
     function addCard(title, description, link, fullurl) {
