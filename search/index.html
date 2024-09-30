@@ -213,7 +213,7 @@
         const query = getQueryParameter('q');
         document.getElementById('search-input').value = query || '';
         animateHeaderAndTabs();
-        setTImeout(function(){
+        setTimeout(function(){
             performSearch(query);
         }, 500);
     };
