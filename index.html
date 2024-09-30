@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,15 +79,29 @@
             from { transform: scale(0.5); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>What would you like to find today?</h1>
-        <form action="/search" method="get">
+        <form id="searchForm" action="/search" method="get" onsubmit="return animateOut()">
             <input type="text" name="q" placeholder="Search..." required>
             <input type="submit" value="Search">
         </form>
     </div>
+    <script>
+        function animateOut() {
+            const form = document.getElementById('searchForm');
+            form.style.animation = 'fadeOut 0.5s forwards';
+            setTimeout(() => {
+                form.submit();
+            }, 500);
+            return false;
+        }
+    </script>
 </body>
 </html>
