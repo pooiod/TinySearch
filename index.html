@@ -96,10 +96,9 @@
     </div>
     <script>
         function animateOut() {
-            const form = document.body;
-            form.style.animation = 'fadeOut 0.2s forwards';
+            document.body.style.animation = 'fadeOut 0.2s forwards';
             setTimeout(() => {
-                form.submit();
+                document.getElementById('searchForm').submit();
             }, 300);
             return false;
         }
