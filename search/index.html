@@ -423,7 +423,7 @@
                         poweredBy: metaData.poweredBy || ''
                     });
                 } catch (metaError) {
-                    // Continue on error, skipping failed meta fetch
+                    await new Promise(resolve => setTimeout(resolve, 500));
                 }
             }
 
