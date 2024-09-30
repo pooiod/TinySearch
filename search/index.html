@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -211,8 +212,10 @@
     window.onload = () => {
         const query = getQueryParameter('q');
         document.getElementById('search-input').value = query || '';
-        performSearch(query);
         animateHeaderAndTabs();
+        setTImeout(function(){
+            performSearch(query);
+        }, 500);
     };
 </script>
 
