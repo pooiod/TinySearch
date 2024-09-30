@@ -81,7 +81,7 @@
         }
         .search-type-tabs .noclickbutton {
             background-color: #e8f0fe;
-            border: 1px solid #e8f0fe;
+            border: 1px solid #d3d3d3;
             color: #000000;
             cursor: default;
         }
@@ -247,6 +247,9 @@
                     window.location.href = button.link.replace("%s", encodeURIComponent(button.regex?(query.replace(button.regex, '').trim()):query));
                 };
                 searchTabs.appendChild(buttonElement);
+            }
+            if (matches.length == 0) {
+                searchTabs.display = "none";
             }
         });
 
