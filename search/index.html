@@ -183,7 +183,11 @@
             results.forEach(result => {
                 addCard(result.title, result.description, result.domain, result.url);
             });
-            displayQuickAnswer(`yay`);
+            if (!results) {
+                displayQuickAnswer(`No results found`);
+            } else {
+                displayQuickAnswer(`yay`);
+            }
         });
         // addCard(`title`, "desc", "domain", "url");
     }
