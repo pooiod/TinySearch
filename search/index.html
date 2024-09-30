@@ -236,7 +236,7 @@
                 const buttonElement = document.createElement("button");
                 buttonElement.textContent = button.name;
                 buttonElement.onclick = () => {
-                    window.location.href = button.link.replace("%s", encodeURIComponent(query.replace(button.regex, '').trim()));
+                    window.location.href = button.link.replace("%s", encodeURIComponent(button.regex?(query.replace(button.regex, '').trim()):query));
                 };
                 searchTabs.appendChild(buttonElement);
             }
