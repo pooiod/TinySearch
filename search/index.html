@@ -147,7 +147,7 @@
     </button>
 </header>
 
-<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;">
+<div id="loader" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; transition: opacity 0.3s ease;">
     <div style="border: 8px solid rgba(0, 0, 0, 0.1); border-top: 8px solid #3498db; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite;"></div>
 </div>
 <style>
@@ -203,6 +203,9 @@
             results.forEach(result => {
                 addCard(result.title, result.description, result.url, result.url);
             });
+
+            document.getElementById("loader").style.opacity = 0;
+
             if (results.length == 0) {
                 displayQuickAnswer(`No results found`);
             } else if (query.endsWith("?")) {
