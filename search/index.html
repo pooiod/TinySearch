@@ -510,6 +510,9 @@
                     });
                 } catch (metaError) {
                     addCard(link.title, "", link.url, link.url, "");
+                    
+                    await new Promise(resolve => setTimeout(resolve, 900));
+
                     results.push({
                         title: link.title,
                         url: link.url,
