@@ -300,11 +300,6 @@
         header.style.opacity = '0';
         header.style.transform = 'translateY(-100)';
 
-        setTimeout(() => {
-            header.style.opacity = '1';
-            header.style.transform = 'translateY(0)';
-        }, 500);
-
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.opacity = '0';
         quickAnswerDiv.style.transform = 'translateY(-100)';
@@ -312,7 +307,9 @@
         setTimeout(() => {
             quickAnswerDiv.style.opacity = '1';
             quickAnswerDiv.style.transform = 'translateY(0)';
-        }, 500);
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
+        }, 2000);
 
         const tabs = document.querySelectorAll('.show');
         tabs.forEach((tab, index) => {
@@ -321,7 +318,7 @@
 
                 setTimeout(() => {
                     tab.classList.add('show');
-                }, (index * 50) + 500);
+                }, (index * 50) + 2000);
             }, index * 50);
         });
 
