@@ -79,19 +79,6 @@
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        .search-type-tabs button .selected {
-            background-color: #d3dae8;
-            border: 1px solid #d3d3d3;
-            color: #1a0dab;
-            padding: 8px 12px;
-            margin-right: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
         .search-type-tabs button.show {
             opacity: 1;
             transform: translateY(0);
@@ -155,9 +142,6 @@
 </header>
 
 <div class="search-type-tabs" id="search-tabs">
-    <button onclick="window.location.href='/search?q='+window.location.search.getQueryParameter('q')" class="selected">Web</button>
-    <button onclick="window.location.href='/images?q='+window.location.search.getQueryParameter('q')">Images</button>
-    <button onclick="window.location.href='/videos?q='+window.location.search.getQueryParameter('q')">Videos</button>
 </div>
 
 <div class="results-container">
@@ -167,6 +151,10 @@
 
 <script>
     let cardIndex = 1;
+
+    const buttonsJson = [
+        { name: "button1", link: "https://example.com/search?q=%s", tags: ["tag1"] }
+    ];
 
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -178,6 +166,18 @@
             window.location.href = '/';
             return;
         }
+
+        const searchTabs = document.getElementById("search-tabs");
+
+        buttonsJson.forEach(button => {
+            if (button.tags.includes(query)) {
+                const buttonElement = document.createElement("a");
+                buttonElement.href = button.link.replace("%s", encodeURIComponent(query));
+                buttonElement.textContent = button.name;
+                searchTabs.appendChild(buttonElement);
+            }
+        });
+
         search(query).then(results => {
             results.forEach(result => {
                 addCard(result.title, result.description, result.url, result.url);
