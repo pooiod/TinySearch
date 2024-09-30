@@ -183,7 +183,6 @@
                 const buttonElement = document.createElement("a");
                 buttonElement.href = button.link.replace("%s", encodeURIComponent(query));
                 buttonElement.textContent = button.name;
-                buttonElement.className = "button-class"; // Add any required classes
                 searchTabs.appendChild(buttonElement);
             }
         });
