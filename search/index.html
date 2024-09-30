@@ -339,10 +339,15 @@
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
 
+        var img = `<img src="${image}" style="width: 10px; height: 10px;">`;
+        if (!title) {
+            img = `<img src="${image}" style="width:50%; height: auto;">`;
+        }
+
         const resultsDiv = document.getElementById('results');
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<img src="${image}"><h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
+        card.innerHTML = `${img}<h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
         resultsDiv.appendChild(card);
         setTimeout(() => {
             card.classList.add('show');
