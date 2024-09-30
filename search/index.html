@@ -384,6 +384,24 @@
     };
 
     async function search(query) {
+        const response = await fetch(`http://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`);
+        const data = await response.json();
+
+        search2(query);
+        
+        const results = data.RelatedTopics.map(topic => {
+            return {
+                title: topic.Text || topic.Result,
+                url: topic.FirstURL || '',
+                description: data.Abstract || '',
+                image: topic.Icon?.URL || ''
+            };
+        });
+
+        return results;
+    }
+
+    async function search2(query) {
         const searchUrl = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
 
         try {
