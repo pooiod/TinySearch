@@ -37,7 +37,7 @@ async function search(query) {
                     poweredBy: metaData.poweredBy || ''
                 };
             } catch (metaError) {
-                console.error(metaError);
+                console.error(`Error fetching meta data for ${link.url}: ${metaError}`);
                 return null;
             }
         }));
