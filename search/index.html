@@ -175,12 +175,15 @@
         }
 
         const searchTabs = document.getElementById("search-tabs");
+        const queryWords = query.split(" ");
 
         buttonsJson.forEach(button => {
-            if (button.tags.includes(query)) {
+        const matches = button.tags.some(tag => queryWords.includes(tag));
+            if (matches) {
                 const buttonElement = document.createElement("a");
                 buttonElement.href = button.link.replace("%s", encodeURIComponent(query));
                 buttonElement.textContent = button.name;
+                buttonElement.className = "button-class"; // Add any required classes
                 searchTabs.appendChild(buttonElement);
             }
         });
