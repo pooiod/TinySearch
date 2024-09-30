@@ -483,6 +483,9 @@
                 try {
                     const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`);
                     if (!metaResponse.ok) { console.warn("rate limited");
+
+                        await new Promise(resolve => setTimeout(resolve, 900));
+
                         addCard(link.title, "", link.url, link.url, "");
                         results.push({
                             title: link.title,
