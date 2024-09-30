@@ -174,19 +174,6 @@
             return;
         }
 
-        const searchTabs = document.getElementById("search-tabs");
-        const queryWords = query.split(" ");
-
-        buttonsJson.forEach(button => {
-        const matches = button.tags.some(tag => queryWords.includes(tag));
-            if (matches) {
-                const buttonElement = document.createElement("a");
-                buttonElement.href = button.link.replace("%s", encodeURIComponent(query));
-                buttonElement.textContent = button.name;
-                searchTabs.appendChild(buttonElement);
-            }
-        });
-
         search(query).then(results => {
             results.forEach(result => {
                 addCard(result.title, result.description, result.url, result.url);
@@ -231,6 +218,19 @@
         const header = document.getElementById('header');
         header.style.opacity = '1';
         header.style.transform = 'translateY(0)';
+
+        const searchTabs = document.getElementById("search-tabs");
+        const queryWords = query.split(" ");
+
+        buttonsJson.forEach(button => {
+        const matches = button.tags.some(tag => queryWords.includes(tag));
+            if (matches) {
+                const buttonElement = document.createElement("a");
+                buttonElement.href = button.link.replace("%s", encodeURIComponent(query));
+                buttonElement.textContent = button.name;
+                searchTabs.appendChild(buttonElement);
+            }
+        });
 
         const tabs = document.querySelectorAll('.search-type-tabs button');
         tabs.forEach((tab, index) => {
