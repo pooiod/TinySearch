@@ -169,7 +169,7 @@
 <script>
     let cardIndex = 1;
 
-    const buttonsJson = [
+    var buttonsJson = [
         { 
             name: "Google", link: "https://google.com/search?q=%s", 
             regex: null,
@@ -177,7 +177,7 @@
             alwaysShow: true
         },
         { 
-            name: "Scratch search", link: "https://scratch.mit.edu/search/projects?q=%s", 
+            name: "Scratch", link: "https://scratch.mit.edu/search/projects?q=%s", 
             regex: /(\bin scratch\b|\bon scratch\b)/gi,
             tags: [
                 "scratch",
@@ -241,8 +241,24 @@
     }
 
     function redirectToSearch() {
-        const query = document.getElementById('search-input').value.trim();
-        window.location.href = `?q=${encodeURIComponent(query)}`;
+        const header = document.getElementById('header');
+        header.style.opacity = '0';
+        header.style.transform = 'translateY(-100)';
+
+        const quickAnswerDiv = document.getElementById('quick-answer');
+        quickAnswerDiv.style.opacity = '0';
+        quickAnswerDiv.style.transform = 'translateY(-100)';
+
+        const tabs = document.querySelectorAll('.show');
+        tabs.forEach((tab, index) => {
+            setTimeout(() => {
+                tab.classList.remove('show');
+            }, index * 50);
+        });
+
+        setTimeout(() => {
+            window.location.href = `?q=${encodeURIComponent(document.getElementById('search-input').value.trim())}`;
+        }, 300);
     }
 
     function animateHeaderAndTabs(query) {
