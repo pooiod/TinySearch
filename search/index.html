@@ -339,7 +339,7 @@
         const resultsDiv = document.getElementById('results');
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
+        card.innerHTML = `<img src="${image}"><h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
         resultsDiv.appendChild(card);
         setTimeout(() => {
             card.classList.add('show');
