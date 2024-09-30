@@ -1,31 +1,28 @@
 async function search(query) {
-    const url = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
+    const frogfindUrl = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(frogfindUrl);
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "text/html");
 
-        const results = Array.from(doc.querySelectorAll('a')).map(link => {
-            const targetUrl = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
-            return fetch(targetUrl)
-                .then(res => res.text())
-                .then(pageText => {
-                    const pageDoc = new DOMParser().parseFromString(pageText, "text/html");
-                    const metaTitle = pageDoc.querySelector('meta[property="og:title"]')?.content || pageDoc.title || '';
-                    const metaDescription = pageDoc.querySelector('meta[property="og:description"]')?.content || pageDoc.querySelector('meta[name="description"]')?.content || '';
-                    const metaImage = pageDoc.querySelector('meta[property="og:image"]')?.content || '';
-                    const metaUrl = targetUrl;
+        const links = Array.from(doc.querySelectorAll('a')).map(link => {
+            const url = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
+            return url;
+        }).filter(url => url); // Filter out empty URLs
 
-                    return { title: metaTitle, description: metaDescription, image: metaImage, url: metaUrl };
-                })
-                .catch(error => {
-                    console.error('Error fetching target page:', error);
-                    return { title: '', description: '', image: '', url: targetUrl }; // Return blank values on error
-                });
-        });
+        const results = await Promise.all(links.map(async (url) => {
+            const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(url)}`);
+            const metaData = await metaResponse.json();
+            return {
+                title: metaData.title || '',
+                description: metaData.description || '',
+                image: metaData.image || '',
+                url: url
+            };
+        }));
 
-        return Promise.all(results);
+        return results.filter(result => result.title || result.description); // Filter out entries without title or description
     } catch (error) {
         console.error('Error fetching search results:', error);
         return [];
