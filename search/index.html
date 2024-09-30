@@ -236,23 +236,41 @@
     }
 
     function redirectToSearch() {
+        openURL(`?q=${encodeURIComponent(document.getElementById('search-input').value.trim())}`);
+    }
+
+    function openURL(url) {
         const header = document.getElementById('header');
         header.style.opacity = '0';
         header.style.transform = 'translateY(-100)';
+
+        setTimeout(() => {
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
+        }, 500);
 
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.opacity = '0';
         quickAnswerDiv.style.transform = 'translateY(-100)';
 
+        setTimeout(() => {
+            quickAnswerDiv.style.opacity = '1';
+            quickAnswerDiv.style.transform = 'translateY(0)';
+        }, 500);
+
         const tabs = document.querySelectorAll('.show');
         tabs.forEach((tab, index) => {
             setTimeout(() => {
                 tab.classList.remove('show');
+
+                setTimeout(() => {
+                    tab.classList.add('show');
+                }, (index * 50) + 500);
             }, index * 50);
         });
 
         setTimeout(() => {
-            window.location.href = `?q=${encodeURIComponent(document.getElementById('search-input').value.trim())}`;
+            window.location.href = url;
         }, 300);
     }
 
