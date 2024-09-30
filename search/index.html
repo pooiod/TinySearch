@@ -250,9 +250,6 @@
         document.getElementById("loader").style.opacity = 1;
 
         search(query).then(results => {
-            document.getElementById("loader").style.opacity = 0;
-            document.getElementById("loader").style.transform = 'translateY(100)';
-
             if (results.length == 0) {
                 displayQuickAnswer(`No results found`);
             } else if (query.endsWith("?")) {
@@ -272,7 +269,10 @@
         quickAnswerDiv.innerHTML = `${!basic?"<strong>Quick Answer:</strong> ":""}${answer}`;
     }
 
-    function addCard(title, description, link, fullurl) {
+    function addCard(title, description, link, fullurl, image) {
+        document.getElementById("loader").style.opacity = 0;
+        document.getElementById("loader").style.transform = 'translateY(100)';
+        
         const resultsDiv = document.getElementById('results');
         const card = document.createElement('div');
         card.className = 'card';
