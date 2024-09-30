@@ -332,6 +332,9 @@
         if (fullurl == "/") {
             return;
         }
+        if (!image) {
+            image = fullurl;
+        }
 
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
@@ -490,12 +493,12 @@
 
                         await new Promise(resolve => setTimeout(resolve, 900));
 
-                        addCard(link.title, "", link.url, link.url, "https://www.google.com/s2/favicons?domain="+link.url);
+                        addCard(link.title, "", link.url, link.url, "");
                         results.push({
                             title: link.title,
                             url: link.url,
                             description: '',
-                            image: "https://www.google.com/s2/favicons?domain="+link.url
+                            image: ''
                         });
                         continue
                     };
@@ -510,10 +513,10 @@
                         title: link.title,
                         url: link.url,
                         description: metaData.description || '',
-                        image: metaData.image || "https://www.google.com/s2/favicons?domain="+link.url
+                        image: metaData.image || ''
                     });
                 } catch (metaError) {
-                    addCard(link.title, "", link.url, link.url, "https://www.google.com/s2/favicons?domain="+link.url);
+                    addCard(link.title, "", link.url, link.url, "");
 
                     await new Promise(resolve => setTimeout(resolve, 900));
 
@@ -521,7 +524,7 @@
                         title: link.title,
                         url: link.url,
                         description: '',
-                        image: "https://www.google.com/s2/favicons?domain="+link.url
+                        image: ''
                     });
                 }
             }
