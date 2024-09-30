@@ -4,8 +4,13 @@ async function search(query) {
     try {
         const response = await fetch(url);
         const data = await response.text();
+
+        console.log(data);
         
         const results = parseFrogFindResults(data);
+
+        console.log(results);
+        
         return results;
     } catch (error) {
         console.error('Error fetching results:', error);
