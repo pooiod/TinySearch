@@ -10,7 +10,7 @@ async function search(query) {
             const titleElement = link.querySelector('font[size="4"]');
             const title = titleElement ? titleElement.textContent : '';
             const url = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
-            const descriptionElement = link.nextElementSibling;
+            const descriptionElement = link.nextElementSibling?.nextElementSibling; // Accessing the next sibling's next sibling
             const description = descriptionElement ? descriptionElement.textContent.trim() : '';
 
             return { title, url, description };
