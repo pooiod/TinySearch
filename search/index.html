@@ -4,11 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f0f2f5" />
+
     <title>Free Search - Results</title>
     <link rel="icon" type="image/x-icon" href="/FreeSearchIcon.png">
-    <meta name="theme-color" content="#f0f2f5" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://pooiod7.neocities.org/snips/GenerativeAI.js"></script>
+
+    <script>
+        var otherSearchEngines = [
+            { 
+                name: "Google", link: "https://www.google.com/search?q=%s", 
+                regex: null,
+                tags: [],
+                alwaysShow: true
+            },
+            { 
+                name: "Google images", link: "https://www.google.com/search?tbm=isch&q=%s", 
+                regex: null,
+                tags: ["image"],
+                alwaysShow: false
+            },
+            { 
+                name: "Scratch", link: "https://scratch.mit.edu/search/projects?q=%s", 
+                regex: /(\bin scratch\b|\bon scratch\b)/gi,
+                tags: [
+                    "scratch",
+                    "project",
+                    "coding"
+                ],
+                alwaysShow: false
+            },
+            { 
+                name: "Itch.io", link: "https://itch.io/search?q=%s", 
+                regex: null,
+                tags: [
+                    "game",
+                    "software",
+                    "indie"
+                ],
+                alwaysShow: false
+            }
+        ];
+    </script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -239,41 +279,6 @@
 <script>
     let cardIndex = 1;
 
-    var buttonsJson = [
-        { 
-            name: "Google", link: "https://www.google.com/search?q=%s", 
-            regex: null,
-            tags: [],
-            alwaysShow: true
-        },
-        { 
-            name: "Google images", link: "https://www.google.com/search?tbm=isch&q=%s", 
-            regex: null,
-            tags: ["image"],
-            alwaysShow: false
-        },
-        { 
-            name: "Scratch", link: "https://scratch.mit.edu/search/projects?q=%s", 
-            regex: /(\bin scratch\b|\bon scratch\b)/gi,
-            tags: [
-                "scratch",
-                "project",
-                "coding"
-            ],
-            alwaysShow: false
-        },
-        { 
-            name: "Itch.io", link: "https://itch.io/search?q=%s", 
-            regex: null,
-            tags: [
-                "game",
-                "software",
-                "indie"
-            ],
-            alwaysShow: false
-        }
-    ];
-
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
@@ -368,7 +373,7 @@
         const searchTabs = document.getElementById("search-tabs");
         const queryWords = query.split(" ");
 
-        buttonsJson.forEach(button => {
+        otherSearchEngines.forEach(button => {
             const matches = button.tags.some(tag => queryWords.includes(tag));
             if (matches || button.alwaysShow) {
                 const buttonElement = document.createElement("button");
