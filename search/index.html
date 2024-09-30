@@ -337,7 +337,9 @@
         card.className = 'card';
         card.innerHTML = `<h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
         resultsDiv.appendChild(card);
-        card.classList.add('show');
+        setTimeout(() => {
+            card.classList.add('show');
+        }, 100);
     }
 
     function redirectToSearch() {
