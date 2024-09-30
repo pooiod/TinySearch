@@ -48,7 +48,7 @@
             border-radius: 10px;
             cursor: pointer;
         }
-        #settings {
+        #advanced {
             background: none;
             border: none;
             cursor: pointer;
@@ -141,13 +141,13 @@
         <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
         <button onclick="redirectToSearch()">Search</button>
     </div>
-    <button id="settings" onclick="window.location.href='/settings'">
-        <img src="https://icon-library.com/images/gear-icon/gear-icon-16.jpg" alt="Settings" width="24px">
+    <button id="advanced" onclick="window.location.href='/advanced'" hidden> <!-- not ready yet -->
+        <img src="https://icon-library.com/images/gear-icon/gear-icon-16.jpg" alt="Advanced" width="24px">
     </button>
 </header>
 
 <div id="loader" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; transition: opacity 0.3s ease; opacity: 0;">
-    <div style="border: 3px solid rgba(0, 0, 0, 0.1); border-top: 3px solid #3498db; border-radius: 50%; width: 30px; height: 30px; animation: spin 0.7s linear infinite;"></div>
+    <div style="border: 4px solid rgba(0, 0, 0, 0.1); border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 0.7s linear infinite;"></div>
 </div>
 <style>
     @keyframes spin {
