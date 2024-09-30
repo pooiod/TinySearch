@@ -234,8 +234,8 @@
         card.innerHTML = `<h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
         resultsDiv.appendChild(card);
         setTimeout(() => {
-            card.classList.add('show'); // Animate card entry
-        }, cardIndex * 50); // Delay each card by 50ms
+            card.classList.add('show');
+        }, cardIndex * 50);
         cardIndex++;
     }
 
@@ -297,7 +297,7 @@
                 searchTabs.appendChild(buttonElement);
             }
             if (matches.length == 0) {
-                searchTabs.display = "none";
+                searchTabs.height = "0px";
             }
         });
 
@@ -305,7 +305,7 @@
         tabs.forEach((tab, index) => {
             setTimeout(() => {
                 tab.classList.add('show');
-            }, index * 50); // Delay each tab by 50ms
+            }, index * 50);
         });
         if (tabs.length == 1) {
             searchTabs.style.display = "none";
