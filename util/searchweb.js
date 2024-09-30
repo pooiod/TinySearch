@@ -12,7 +12,7 @@ async function search(query) {
             return {
                 title: titleElement ? titleElement.textContent : "No title",
                 url: link.getAttribute('href'),
-                description: descriptionElement ? descriptionElement.textContent.trim() : "No description"
+                description: descriptionElement ? descriptionElement.innerHTML.trim() : "No description"
             };
         }).filter(result => result.title !== "No title");
 
