@@ -22,7 +22,7 @@ async function search(query) {
             if (!link.url) return null;
 
             try {
-                const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`);
+                const metaResponse = await fetch("https://test.cors.workers.dev/?"+encodeURIComponent(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`));
                 if (!metaResponse.ok) {
                     console.warn(`Meta fetch failed for ${link.url}: ${metaResponse.status}`);
                     return null;
