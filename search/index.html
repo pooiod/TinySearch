@@ -350,7 +350,7 @@
         tabs.forEach((tab, index) => {
             setTimeout(() => {
                 tab.classList.add('show');
-            }, index * 50);
+            }, index * 5);
         });
         if (tabs.length == 1) {
             searchTabs.style.display = "none";
@@ -414,7 +414,7 @@
                     if (link.url) {
                         addCard(link.title, metaData.description, link.url, link.url, metaData.image);
                     }
-                    
+
                     results.push({
                         title: link.title,
                         url: link.url,
