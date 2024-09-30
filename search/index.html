@@ -223,7 +223,6 @@
         const queryWords = query.split(" ");
 
         buttonsJson.forEach(button => {
-            buttonsJson.forEach(button => {
             const matches = button.tags.some(tag => queryWords.includes(tag));
             if (matches) {
                 const buttonElement = document.createElement("button");
@@ -233,7 +232,7 @@
                 };
                 searchTabs.appendChild(buttonElement);
             }
-            });
+        });
 
         const tabs = document.querySelectorAll('.search-type-tabs button');
         tabs.forEach((tab, index) => {
