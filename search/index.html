@@ -50,7 +50,7 @@
             border-radius: 10px;
             cursor: pointer;
         }
-        #advanced {
+        #icon {
             background: none;
             border: none;
             cursor: pointer;
@@ -139,13 +139,13 @@
 <body>
 
 <header id="header">
+    <button id="icon" onclick="window.location.href='/'"></button>
+        <img src="/FreeSearchIcon.png" alt="Home" width="24px">
+    </button>
     <div id="search-bar">
         <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
         <button onclick="redirectToSearch()">Search</button>
     </div>
-    <button id="advanced" onclick="window.location.href='/advanced'">
-        <img src="https://icon-library.com/images/gear-icon/gear-icon-16.jpg" alt="Advanced" width="24px">
-    </button>
 </header>
 
 <div id="loader" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; transition: opacity 0.3s ease; opacity: 0;">
