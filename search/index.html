@@ -79,10 +79,9 @@
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        .noclickbutton {
-            background-color: #e8f0fe;
-            border: 1px solid #e8f0fe;
-            color: #000000;
+        .search-type-tabs button.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         .quick-answer {
             background-color: #f9f9f9;
@@ -143,7 +142,6 @@
 </header>
 
 <div class="search-type-tabs" id="search-tabs">
-    <!-- <button class="noclickbutton">Try searching other platforms</button> -->
 </div>
 
 <div class="results-container">
@@ -189,7 +187,7 @@
                 addCard(result.title, result.description, result.url, result.url);
             });
             if (results.length == 0) {
-                displayQuickAnswer(`No results found`, true);
+                displayQuickAnswer(`No results found`);
             } else if (query.endsWith("?")) {
                 displayQuickAnswer(`Loading quick answer...`, true);
                 gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. You may not list your name, or that you are a bot, just answer based on the results. Keep it short and simple. Also, use html formatting for your text, not mardown.`, "gpt-4o");
