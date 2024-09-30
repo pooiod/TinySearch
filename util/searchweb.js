@@ -1,5 +1,5 @@
 async function search(query) {
-    const url = `https://frogfind.com/?q=${encodeURIComponent(query)}`;
+    const url = `https://api.allorigins.win/raw?url=https://frogfind.com/?q=${encodeURIComponent(query)}`;
     
     try {
         const response = await fetch(url);
