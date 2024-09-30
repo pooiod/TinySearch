@@ -1,8 +1,12 @@
 async function search(query) {
     const searchUrl = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
-    
+
     try {
         const response = await fetch(searchUrl);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch search results: ${response.status}`);
+        }
+
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "text/html");
@@ -16,15 +20,26 @@ async function search(query) {
 
         const results = await Promise.all(links.map(async link => {
             if (!link.url) return null;
-            const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`);
-            const metaData = await metaResponse.json();
-            return {
-                title: link.title,
-                url: link.url,
-                description: metaData.description || '',
-                image: metaData.image || '',
-                poweredBy: metaData.poweredBy || ''
-            };
+
+            try {
+                const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`);
+                if (!metaResponse.ok) {
+                    console.warn(`Meta fetch failed for ${link.url}: ${metaResponse.status}`);
+                    return null;
+                }
+
+                const metaData = await metaResponse.json();
+                return {
+                    title: link.title,
+                    url: link.url,
+                    description: metaData.description || '',
+                    image: metaData.image || '',
+                    poweredBy: metaData.poweredBy || ''
+                };
+            } catch (metaError) {
+                console.error(`Error fetching meta data for ${link.url}:`, metaError);
+                return null;
+            }
         }));
 
         return results.filter(result => result); // Filter out null results
