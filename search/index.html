@@ -356,6 +356,10 @@
 
     function redirectToSearch() {
         openURL(`?q=${encodeURIComponent(document.getElementById('search-input').value.trim())}`);
+
+        setTimeout(() => {
+            document.getElementById('search-input').value = getQueryParameter('q') || '';
+        }, 2000);
     }
 
     function openURL(url) {
