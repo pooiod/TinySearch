@@ -323,9 +323,11 @@
     function displayQuickAnswer(answer, basic) {
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.display = 'block';
-        quickAnswerDiv.style.opacity = '1';
         quickAnswerDiv.style.transform = 'translateY(0)';
         quickAnswerDiv.innerHTML = `${!basic?"<strong>Quick Answer:</strong> ":""}${answer}`;
+        setTimeout(function(){
+            quickAnswerDiv.style.opacity = '1';
+        }, 100);
     }
 
     function addCard(title, description, link, fullurl, image) {
