@@ -166,9 +166,9 @@
             return;
         }
         displayQuickAnswer(`This is a quick answer to your search query about "${query}".`);
-        addCard(`Example Search Result 1 for "${query}"`, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor nunc quis sapien.", "example.com");
-        addCard(`Example Search Result 2 for "${query}"`, "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.", "example.com");
-        addCard(`Example Search Result 3 for "${query}"`, "Ut lacinia, est vitae consequat hendrerit, nunc orci dignissim metus, at fermentum dolor lorem non odio.", "example.com");
+        addCard(`Example Search Result 1 for "${query}"`, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor nunc quis sapien.", "example.com", "https://example.com");
+        addCard(`Example Search Result 2 for "${query}"`, "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.", "example.com", "https://example.com");
+        addCard(`Example Search Result 3 for "${query}"`, "Ut lacinia, est vitae consequat hendrerit, nunc orci dignissim metus, at fermentum dolor lorem non odio.", "example.com", "https://example.com");
     }
 
     function displayQuickAnswer(answer) {
@@ -178,11 +178,11 @@
         quickAnswerDiv.innerHTML = `<strong>Quick Answer:</strong> ${answer}`;
     }
 
-    function addCard(title, description, link) {
+    function addCard(title, description, link, fullurl) {
         const resultsDiv = document.getElementById('results');
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h3><a href="#">${title}</a></h3><p>${description}</p><a href="#">${link}</a>`;
+        card.innerHTML = `<h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
         resultsDiv.appendChild(card);
         setTimeout(() => {
             card.classList.add('show'); // Animate card entry
