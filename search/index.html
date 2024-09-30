@@ -145,7 +145,7 @@
 </div>
 
 <div class="results-container">
-    <div id="quick-answer" class="quick-answer"></div>
+    <div id="quick-answer" class="quick-answer" style="display: none;"></div>
     <div id="results"></div>
 </div>
 
@@ -200,6 +200,7 @@
 
     function displayQuickAnswer(answer, basic) {
         const quickAnswerDiv = document.getElementById('quick-answer');
+        quickAnswerDiv.style.display = 'block';
         quickAnswerDiv.style.opacity = '1';
         quickAnswerDiv.style.transform = 'translateY(0)';
         quickAnswerDiv.innerHTML = `${!basic?"<strong>Quick Answer:</strong> ":""}${answer}`;
