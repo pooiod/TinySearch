@@ -5,11 +5,17 @@ async function search(query) {
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "text/html");
-        const results = Array.from(doc.querySelectorAll('a')).map(link => ({
-            title: link.querySelector('font[size="4"]').textContent,
-            url: link.getAttribute('href'),
-            description: link.nextElementSibling.textContent.trim()
-        })).filter(result => result.title);
+        const results = Array.from(doc.querySelectorAll('a')).map(link => {
+            const titleElement = link.querySelector('font[size="4"]');
+            const descriptionElement = link.nextElementSibling;
+
+            return {
+                title: titleElement ? titleElement.textContent : "No title",
+                url: link.getAttribute('href'),
+                description: descriptionElement ? descriptionElement.textContent.trim() : "No description"
+            };
+        }).filter(result => result.title !== "No title");
+
         return results;
     } catch (error) {
         console.error('Error fetching search results:', error);
