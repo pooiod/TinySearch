@@ -101,6 +101,9 @@
             document.body.style.animation = 'fadeOut 0.2s forwards';
             setTimeout(() => {
                 document.getElementById('searchForm').submit();
+                setTimeout(() => {
+                    document.body.style.opacity = 1;
+                }, 300);
             }, 300);
             return false;
         }
