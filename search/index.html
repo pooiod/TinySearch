@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://pooiod7.neocities.org/snips/GenerativeAI.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #search-bar {
+            display: flex;
+            align-items: center;
+            width: 80%;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 16px;
+            autocomplete: "off";
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        #settings {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .results-container {
+            padding: 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .search-type-tabs {
+            display: flex;
+            margin-top: 3px;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .search-type-tabs button {
+            background-color: #e8f0fe;
+            border: 1px solid #d3d3d3;
+            color: #1a0dab;
+            padding: 8px 12px;
+            margin-right: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .search-type-tabs button.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .quick-answer {
+            background-color: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+            margin: 0 20px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .card {
+            background-color: white;
+            border-radius: 4px 8px 8px 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 15px 20px;
+            padding: 15px;
+            border-left: 4px solid #1a73e8;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #1a0dab;
+        }
+        .card p {
+            font-size: 14px;
+            color: #4d5156;
+        }
+        .card a {
+            color: #1a0dab;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div id="search-bar">
+        <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+        <button onclick="redirectToSearch()">Search</button>
+    </div>
+    <button id="settings" onclick="window.location.href='/settings'">
+        <img src="https://icon-library.com/images/gear-icon/gear-icon-16.jpg" alt="Settings" width="24px">
+    </button>
+</header>
+
+<div class="search-type-tabs" id="search-tabs">
+    <button onclick="window.location.href='/web'">Web</button>
+    <button onclick="window.location.href='/images'">Images</button>
+    <button onclick="window.location.href='/videos'">Videos</button>
+    <button onclick="window.location.href='/news'">News</button>
+</div>
+
+<div class="results-container">
+    <div id="quick-answer" class="quick-answer"></div>
+    <div id="results"></div>
+</div>
+
+<script>
+    let cardIndex = 0;
+
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    function performSearch(query) {
+        if (!query) {
+            window.location.href = '/';
+            return;
+        }
+        displayQuickAnswer(`This is a quick answer to your search query about "${query}".`);
+        cardIndex = 0; // Reset the card index for new searches
+        addCard(`Example Search Result 1 for "${query}"`, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor nunc quis sapien.", "example.com");
+        addCard(`Example Search Result 2 for "${query}"`, "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.", "example.com");
+        addCard(`Example Search Result 3 for "${query}"`, "Ut lacinia, est vitae consequat hendrerit, nunc orci dignissim metus, at fermentum dolor lorem non odio.", "example.com");
+    }
+
+    function displayQuickAnswer(answer) {
+        const quickAnswerDiv = document.getElementById('quick-answer');
+        quickAnswerDiv.style.opacity = '1';
+        quickAnswerDiv.style.transform = 'translateY(0)';
+        quickAnswerDiv.innerHTML = `<strong>Quick Answer:</strong> ${answer}`;
+    }
+
+    function addCard(title, description, link) {
+        const resultsDiv = document.getElementById('results');
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3><a href="#">${title}</a></h3><p>${description}</p><a href="#">${link}</a>`;
+        resultsDiv.appendChild(card);
+        setTimeout(() => {
+            card.classList.add('show'); // Animate card entry
+        }, cardIndex * 50); // Delay each card by 50ms
+        cardIndex++;
+    }
+
+    function redirectToSearch() {
+        const query = document.getElementById('search-input').value.trim();
+        window.location.href = `/?q=${encodeURIComponent(query)}`;
+    }
+
+    function animateHeaderAndTabs() {
+        const header = document.getElementById('header');
+        header.style.opacity = '1';
+        header.style.transform = 'translateY(0)';
+
+        const tabs = document.querySelectorAll('.search-type-tabs button');
+        tabs.forEach((tab, index) => {
+            setTimeout(() => {
+                tab.classList.add('show');
+            }, index * 50); // Delay each tab by 50ms
+        });
+    }
+
+    window.onload = () => {
+        const query = getQueryParameter('q');
+        document.getElementById('search-input').value = query || '';
+        performSearch(query);
+        animateHeaderAndTabs();
+    };
+</script>
+
+</body>
+</html>
