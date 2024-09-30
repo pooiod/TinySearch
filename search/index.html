@@ -24,7 +24,7 @@
                 name: "Google images", link: "https://www.google.com/search?tbm=isch&q=%s", 
                 regex: null,
                 tags: ["image"],
-                alwaysShow: false
+                alwaysShow: true
             },
             { 
                 name: "Scratch", link: "https://scratch.mit.edu/search/projects?q=%s", 
@@ -332,7 +332,7 @@
         if (fullurl == "/") {
             return;
         }
-        
+
         document.getElementById("loader").style.opacity = 0;
         document.getElementById("loader").style.transform = 'translateY(100)';
 
