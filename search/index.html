@@ -300,9 +300,11 @@
         document.getElementById("loader").style.opacity = 1;
 
         search(query).then(results => {
-
             results.forEach(result => {
-                addCard(result.title, result.description, result.url, result.url);
+                setTimeout(() => {
+                    addCard(result.title, result.description, result.url, result.url);
+                }, cardIndex * 50);
+                cardIndex++;
             });
 
             if (results.length == 0) {
@@ -335,10 +337,7 @@
         card.className = 'card';
         card.innerHTML = `<h3><a href="${fullurl}">${title}</a></h3><p>${description}</p><a href="${fullurl}">${link}</a>`;
         resultsDiv.appendChild(card);
-        setTimeout(() => {
-            card.classList.add('show');
-        }, cardIndex * 50);
-        cardIndex++;
+        card.classList.add('show');
     }
 
     function redirectToSearch() {
