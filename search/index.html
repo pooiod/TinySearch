@@ -481,7 +481,10 @@
 
                 try {
                     const metaResponse = await fetch(`https://api.dub.co/metatags?url=${encodeURIComponent(link.url)}`);
-                    if (!metaResponse.ok) continue;
+                    if (!metaResponse.ok) {
+                        await new Promise(resolve => setTimeout(resolve, 900));
+                        continue
+                    };
 
                     const metaData = await metaResponse.json();
 
@@ -493,12 +496,17 @@
                         title: link.title,
                         url: link.url,
                         description: metaData.description || '',
-                        image: metaData.image || '',
-                        poweredBy: metaData.poweredBy || ''
+                        image: metaData.image || ''
                     });
                 } catch (metaError) {
                     console.warn("rate limited");
                     await new Promise(resolve => setTimeout(resolve, 900));
+                    results.push({
+                        title: link.title,
+                        url: link.url,
+                        description: '',
+                        image: ''
+                    });
                 }
             }
 
