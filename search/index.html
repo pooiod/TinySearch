@@ -423,7 +423,8 @@
                         poweredBy: metaData.poweredBy || ''
                     });
                 } catch (metaError) {
-                    await new Promise(resolve => setTimeout(resolve, 500));
+                    console.warn("rate limited");
+                    await new Promise(resolve => setTimeout(resolve, 900));
                 }
             }
 
