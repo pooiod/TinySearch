@@ -510,7 +510,7 @@
                         title: link.title,
                         url: link.url,
                         description: metaData.description || '',
-                        image: metaData.image || ''
+                        image: metaData.image || "https://www.google.com/s2/favicons?domain="+link.url
                     });
                 } catch (metaError) {
                     addCard(link.title, "", link.url, link.url, "https://www.google.com/s2/favicons?domain="+link.url);
