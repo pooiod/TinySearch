@@ -245,7 +245,8 @@
             top: 60px;
             background-color: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            z-index: 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
+            z-index: 99999999999999999999999;
+            transition: opacity 0.3s ease;
         }
         .suggestion-item {
             padding: 8px;
@@ -387,7 +388,6 @@
             if (results.length == 0) {
                 displayQuickAnswer(`No results found`);
                 document.getElementById("loader").style.opacity = 0;
-                document.getElementById("loader").style.transform = 'translateY(100)';
             } else if (query.endsWith("?")) {
                 displayQuickAnswer(`Loading quick answer...`, true);
                 gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. You may not list your name, or that you are a bot, just answer based on the results. Keep it short and simple. Also, use html formatting for your text, not mardown.`, "gpt-4o");
@@ -416,7 +416,6 @@
         }
 
         document.getElementById("loader").style.opacity = 0;
-        document.getElementById("loader").style.transform = 'translateY(100)';
 
         var img = `<img src="${image}" style="width: 15px; max-height: 40px; height: auto;">`;
         if (!title) {
@@ -558,9 +557,22 @@
                 });
                 document.getElementById('suggestions').appendChild(div);
             });
-            document.getElementById('suggestions').removeAttribute('style');
+            
+            if (document.getElementById('suggestions').style.opacity == '1') {
+                document.getElementById('suggestions').removeAttribute('style');
+                document.getElementById('suggestions').style.opacity = '1';
+            } else {
+                document.getElementById('suggestions').removeAttribute('style');
+                document.getElementById('suggestions').style.opacity = '0';
+                setTimeout(function(){
+                    document.getElementById('suggestions').style.opacity = '1';
+                }, 100);
+            }
         } else {
-            document.getElementById('suggestions').style.display = 'none';
+            document.getElementById('suggestions').style.opacity = '0';
+            setTimeout(function(){
+                document.getElementById('suggestions').style.display = 'none';
+            }, 300);
         }
     });
 
@@ -574,7 +586,10 @@
 
     document.getElementById('search-input').addEventListener('blur', function() {
         setTimeout(() => {
-            document.getElementById('suggestions').style.display = 'none';
+            document.getElementById('suggestions').style.opacity = '0';
+            setTimeout(function(){
+                document.getElementById('suggestions').style.display = 'none';
+            }, 300);
         }, 100); 
     });
 
