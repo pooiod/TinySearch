@@ -72,7 +72,7 @@
             });
         } else {
             otherSearchEngines.push({ 
-                name: "Web", link: "?q=%s", 
+                name: "Websites", link: "?q=%s", 
                 regex: null,
                 tags: [],
                 alwaysShow: true
@@ -505,7 +505,7 @@
                 const buttonElement = document.createElement("button");
                 buttonElement.textContent = button.name;
                 buttonElement.onclick = () => {
-                    window.location.href = button.link.replace("%s", encodeURIComponent(button.regex?(query.replace(button.regex, '').trim()):query));
+                    openURL(button.link.replace("%s", encodeURIComponent(button.regex?(query.replace(button.regex, '').trim()):query)));
                 };
                 searchTabs.appendChild(buttonElement);
             }
