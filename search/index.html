@@ -417,6 +417,7 @@ Try to include resource links aswell.`, "gpt-4o");
                 displayQuickAnswer(`No results found`);
                 document.getElementById("loader").style.opacity = 0;
             } else if (query.endsWith("?")) {
+                quickanswer(results);
             }
         });
         setTimeout(function(){
@@ -677,12 +678,6 @@ Try to include resource links aswell.`, "gpt-4o");
             const text = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(text, "text/html");
-
-            try {
-                quickanswer(text);
-            } catch(err) {
-                alert(err);
-            }
 
             const links = Array.from(doc.querySelectorAll('a')).map(link => {
                 const titleElement = link.querySelector('font[size="4"]');
