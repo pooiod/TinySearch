@@ -147,7 +147,29 @@
 </head>
 <body>
     <div class="container">
-        <h1>What would you like to find today?</h1> <br>
+        <script>
+            const quotes = [
+                "What’s on your mind today?",
+                "What are you curious about?",
+                "What would you like to find today?",
+                "What do you want to explore?",
+                "What are you searching for today?",
+                "What brings you here today?",
+                "What knowledge do you seek?",
+                "What do you want to know?",
+                "What are you looking to uncover?",
+                "What would you like to learn today?",
+                "What’s piqued your interest?",
+                "What’s your inquiry today?"
+            ];
+        
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            const h1 = document.createElement('h1');
+            h1.textContent = randomQuote;
+        
+            const scriptElement = document.currentScript;
+            scriptElement.parentNode.insertBefore(h1, scriptElement);
+        </script> <br>
         <form id="searchForm" action="/search" method="get" onsubmit="return animateOut()">
             <div class="search-bar">
                 <input type="text" name="q" id="searchInput" placeholder="Search..." autocomplete="off" required>
