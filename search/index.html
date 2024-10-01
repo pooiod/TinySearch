@@ -243,7 +243,6 @@
             overflow-y: auto;
             position: absolute;
             top: 60px;
-            display: none;
             background-color: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
@@ -553,7 +552,7 @@
                 });
                 document.getElementById('suggestions').appendChild(div);
             });
-            document.getElementById('suggestions').style.display = 'block';
+            document.getElementById('suggestions').removeAttribute('style');
         } else {
             document.getElementById('suggestions').style.display = 'none';
         }
@@ -564,6 +563,8 @@
     //         document.getElementById('suggestions').style.display = 'block';
     //     }
     // });
+
+    document.getElementById('suggestions').style.display = 'none';
 
     document.getElementById('search-input').addEventListener('blur', function() {
         setTimeout(() => {
