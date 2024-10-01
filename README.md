@@ -11,5 +11,7 @@ TinySearch is a lightweight, dynamic search engine built on DuckDuckGo's API. It
 - **Client Side:** Made using public apis and client side javascript.
 - **Open Source:** You always know what's going on under the hood.
 
-### Usage:
-Just type your query into the search bar and let TinySearch handle the rest.
+<br>
+
+> Please note: this project is new, and may have bugs. 
+> Please report any issues in the [issues](https://github.com/pooiod/TinySearch/issues) tab
