@@ -395,15 +395,19 @@
     function quickanswer(data) {
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.opacity = '0';
-        setTimeout(function(){quickAnswerDiv.style.display = "none";}, 200);
+        setTimeout(function(){
+            quickAnswerDiv.style.display = "none";
+            gpt.prompt(getQueryParameter("q")).then(displayQuickAnswer);
+            setTimeout(function(){
+                quickAnswerDiv.style.display = "none";
+            }, 100);
+        }, 200);
 
         gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. 
 You may not list your name, or that you are a bot, or anything about yourself, just answer based on the results. 
 Keep it short and simple. Also, use html formatting for your text, not mardown.
 Try to include resource links aswell.`, "gpt-4o");
         gpt.inform("Search results: " + JSON.stringify(data));
-
-        gpt.prompt(getQueryParameter("q")).then(displayQuickAnswer);
     }
 
     function performSearch(query) {
