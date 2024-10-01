@@ -659,7 +659,15 @@ Try to include resource links aswell.`, "gpt-4o");
             };
         });
 
-        quickanswer(results);
+        const gptresults = data.RelatedTopics.map(topic => {
+            return {
+                title: topic.Heading || topic.text,
+                url: topic.FirstURL || '',
+                description: data.Abstract || ''
+            };
+        });
+
+        quickanswer(gptresults);
 
         return searchBackground(query);
 
