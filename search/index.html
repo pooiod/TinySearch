@@ -418,7 +418,7 @@
         });
         setTimeout(function(){
             if (!did) {
-                displayQuickAnswer(`Unable to find any results`);
+                displayQuickAnswer(`Unable to find any results`, true);
                 document.getElementById("loader").style.opacity = 0;
             }
         }, 9000);
