@@ -466,8 +466,10 @@
         // }, 2000);
     }
 
-    window.addEventListener('pageshow', () => {
-        window.location.reload();
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            window.location.reload();
+        }
     });
 
     function openURL(url) {
