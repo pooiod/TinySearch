@@ -63,7 +63,7 @@
                 alwaysShow: false
             }
         ];
-        if (new URLSearchParams(window.location.search).get("images")) {
+        if (!new URLSearchParams(window.location.search).get("images")) {
             otherSearchEngines.push({ 
                 name: "Images", link: "?images=true&q=%s", 
                 regex: null,
