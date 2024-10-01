@@ -1,4 +1,4 @@
-window.main = function(query) {
+window.widgetmain = function(query) {
     window.appendToDisplay = function(value) {
         document.getElementById('display').value += value;
     };

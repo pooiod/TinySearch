@@ -22,13 +22,13 @@ function showwidget(query) {
         script.src = html.function;
 
         script.onload = function() {
-            if (typeof main === 'function') {
-                html = main(query);
+            if (typeof widgetmain === 'function') {
+                html = widgetmain(query);
                 if (html) {
                     displayQuickAnswer(html, true);
                 }
             } else {
-                console.error("Function main is not defined.");
+                console.error("Widget did not respond with widgetmain function.");
             }
         };
 
