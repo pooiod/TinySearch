@@ -678,7 +678,11 @@ Try to include resource links aswell.`, "gpt-4o");
             const parser = new DOMParser();
             const doc = parser.parseFromString(text, "text/html");
 
-            // quickanswer(text);
+            try {
+                quickanswer(text);
+            } catch(err) {
+                alert(err);
+            }
 
             const links = Array.from(doc.querySelectorAll('a')).map(link => {
                 const titleElement = link.querySelector('font[size="4"]');
