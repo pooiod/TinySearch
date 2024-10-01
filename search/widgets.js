@@ -34,8 +34,8 @@ var widgets = [
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        margin: 20px;
-                        padding: 20px;
+                        // margin: 20px;
+                        // padding: 20px;
                     }
                     #quick-answer #display {
                         width: 100%;
