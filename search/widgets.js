@@ -61,7 +61,7 @@ var widgets = [
                         transition: background 0.2s;
                     }
                     #quick-answer button:hover {
-                        background: #e0e0e0;
+                        background: #777;
                     }
                     #quick-answer button:active {
                         background: #d0d0d0;
