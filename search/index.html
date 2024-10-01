@@ -399,7 +399,7 @@ You may not list your name, or that you are a bot, or anything about yourself, j
 Keep it short and simple. Also, use html formatting for your text, not mardown.
 Try to include resource links aswell.`, "gpt-4o");
         gpt.inform("Search results: " + JSON.stringify(data));
-        gpt.prompt(query).then(displayQuickAnswer);
+        gpt.prompt(getQueryParameter("q")).then(displayQuickAnswer);
     }
 
     function performSearch(query) {
