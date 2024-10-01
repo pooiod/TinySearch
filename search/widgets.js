@@ -27,6 +27,8 @@ var widgets = [
                     result = "Error";
                 }
             }
+
+            document.getElementById("loader").style.top = "90%";
     
             return `
                 <style>
