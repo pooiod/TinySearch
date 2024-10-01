@@ -426,7 +426,7 @@ Try to include resource links aswell.`, "gpt-4o");
             } else if (query.endsWith("?")) {
                 quickanswer(results);
             } else {
-                showwidget(query, results);
+                // showwidget(query, results);
             }
         });
         setTimeout(function(){
@@ -677,7 +677,11 @@ Try to include resource links aswell.`, "gpt-4o");
         });
 
         try {
-            quickanswer(gptresults);
+            if (query.endsWith("?")) {
+                quickanswer(gptresults);
+            } else {
+                showwidget(query, results);
+            }
         } catch(err) {
             alert(err);
         }
