@@ -416,11 +416,17 @@
             image = "https://www.google.com/s2/favicons?domain=" + fullurl;
         }
 
+        if (getQueryParameter('images')) {
+            if (title) return;
+        } else {
+            if (!title) return;
+        }
+
         document.getElementById("loader").style.opacity = 0;
 
         var img = `<img src="${image}" style="width: 15px; max-height: 40px; height: auto;">`;
         if (!title) {
-            img = `<img src="${image}" style="max-width:80%; height: auto; max-height: 40vh;">`;
+            img = `<img src="${image}" style="max-width:100%; height: auto; max-height: 80vh;">`;
         }
 
         const resultsDiv = document.getElementById('results');
