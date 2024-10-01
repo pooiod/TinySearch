@@ -28,7 +28,7 @@ var widgets = [
                 }
             }
 
-            document.getElementById("loader").style.top = "90%";
+            document.getElementById("loader").style.top = "95%";
     
             return `
                 <style>
