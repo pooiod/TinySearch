@@ -35,10 +35,7 @@ var widgets = [
                         flex-direction: column;
                         align-items: center;
                         margin: 20px;
-                        border: 2px solid #ccc;
-                        border-radius: 10px;
                         padding: 20px;
-                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
                     }
                     #quick-answer #display {
                         width: 100%;
@@ -57,7 +54,7 @@ var widgets = [
                         margin: 5px;
                         border: none;
                         border-radius: 5px;
-                        background: #f0f0f0;
+                        background: #444;
                         cursor: pointer;
                         transition: background 0.2s;
                     }
