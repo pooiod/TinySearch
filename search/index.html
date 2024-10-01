@@ -63,7 +63,7 @@
                 alwaysShow: false
             }
         ];
-        if (!getQueryParameter(images)) {
+        if (getQueryParameter(images)) {
             otherSearchEngines.push(            { 
                 name: "Images", link: "?images=true&q=%s", 
                 regex: null,
