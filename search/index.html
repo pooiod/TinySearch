@@ -64,14 +64,14 @@
             }
         ];
         if (!new URLSearchParams(window.location.search).get("images")) {
-            otherSearchEngines.push({ 
+            otherSearchEngines.unshift({ 
                 name: "Images", link: "?images=true&q=%s", 
                 regex: null,
                 tags: ["image", "gif", "png", "transparent", "webp"],
                 alwaysShow: true
             });
         } else {
-            otherSearchEngines.push({ 
+            otherSearchEngines.unshift({ 
                 name: "Websites", link: "?q=%s", 
                 regex: null,
                 tags: [],
@@ -367,7 +367,7 @@
 </style>
 
 <div class="search-type-tabs" id="search-tabs">
-    <button class="noclickbutton">Try searching other platforms REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</button>
+    <button class="noclickbutton">Try searching other platforms</button>
 </div>
 
 <div class="results-container">
