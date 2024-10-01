@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://pooiod7.neocities.org/snips/GenerativeAI.js"></script>
+    <script src="widgets.js">function showwidget(query) {}</script>
 
     <script>
         var otherSearchEngines = [
@@ -424,6 +425,8 @@ Try to include resource links aswell.`, "gpt-4o");
                 document.getElementById("loader").style.opacity = 0;
             } else if (query.endsWith("?")) {
                 quickanswer(results);
+            } else {
+                showwidget(query, results);
             }
         });
         setTimeout(function(){
