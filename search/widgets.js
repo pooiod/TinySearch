@@ -5,6 +5,16 @@ var widgets = [
             if (/^[0-9+\-*/().\s]+$/.test(query)) {
                 return `<div>Result: ${eval(query)}</div>`;
             } else {
+                window.appendToDisplay = function(value) {
+                    document.getElementById('display').value += value;
+                }
+                window.clearDisplay = function() {
+                    document.getElementById('display').value = '';
+                }
+                window.calculateResult = function() {
+                    const display = document.getElementById('display');
+                    display.value = eval(display.value);
+                }
                 return `
                     <div>
                         <input type="text" id="display" readonly>
@@ -33,16 +43,6 @@ var widgets = [
                             <button onclick="appendToDisplay('/')">/</button>
                         </div>
                     </div>
-                        window.appendToDisplay = function(value) {
-                            document.getElementById('display').value += value;
-                        }
-                        window.clearDisplay = function() {
-                            document.getElementById('display').value = '';
-                        }
-                        window.calculateResult = function() {
-                            const display = document.getElementById('display');
-                            display.value = eval(display.value);
-                        }
                 `;
             }
         }
