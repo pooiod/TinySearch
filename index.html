@@ -205,12 +205,16 @@
             document.body.style.animation = 'fadeOut 0.2s forwards';
             setTimeout(() => {
                 document.getElementById('searchForm').submit();
-                setTimeout(() => {
-                    document.body.style.opacity = 1;
-                }, 1000);
+                // setTimeout(() => {
+                //     window.location.reload();
+                // }, 1000);
             }, 300);
             return false;
         }
+
+        window.addEventListener('popstate', () => {
+            window.location.reload();
+        });
     </script>
 </body>
 </html>

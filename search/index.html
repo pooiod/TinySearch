@@ -435,10 +435,14 @@
     function redirectToSearch() {
         openURL(`?q=${encodeURIComponent(document.getElementById('search-input').value.trim())}`);
 
-        setTimeout(() => {
-            document.getElementById('search-input').value = getQueryParameter('q') || '';
-        }, 2000);
+        // setTimeout(() => {
+        //     document.getElementById('search-input').value = getQueryParameter('q') || '';
+        // }, 2000);
     }
+
+    window.addEventListener('popstate', () => {
+        window.location.reload();
+    });
 
     function openURL(url) {
         const header = document.getElementById('header');
@@ -449,21 +453,21 @@
         quickAnswerDiv.style.opacity = '0';
         quickAnswerDiv.style.transform = 'translateY(-100)';
 
-        setTimeout(() => {
-            quickAnswerDiv.style.opacity = '1';
-            quickAnswerDiv.style.transform = 'translateY(0)';
-            header.style.opacity = '1';
-            header.style.transform = 'translateY(0)';
-        }, 2000);
+        // setTimeout(() => {
+        //     quickAnswerDiv.style.opacity = '1';
+        //     quickAnswerDiv.style.transform = 'translateY(0)';
+        //     header.style.opacity = '1';
+        //     header.style.transform = 'translateY(0)';
+        // }, 2000);
 
         const tabs = document.querySelectorAll('.show');
         tabs.forEach((tab, index) => {
             setTimeout(() => {
                 tab.classList.remove('show');
 
-                setTimeout(() => {
-                    tab.classList.add('show');
-                }, (index * 50) + 2000);
+                // setTimeout(() => {
+                //     tab.classList.add('show');
+                // }, (index * 50) + 2000);
             }, index * 30);
         });
 
