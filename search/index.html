@@ -414,7 +414,7 @@ Try to include resource links aswell.`, "gpt-4o");
             // });
 
             if (results.length <= 1) {
-                displayQuickAnswer(`No results found`);
+                displayQuickAnswer(`No results found`, true);
                 document.getElementById("loader").style.opacity = 0;
             } else if (query.endsWith("?")) {
                 quickanswer(results);
