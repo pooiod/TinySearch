@@ -413,7 +413,7 @@ Try to include resource links aswell.`, "gpt-4o");
             //     cardIndex++;
             // });
 
-            if (results.length == 0) {
+            if (results.length <= 2) {
                 displayQuickAnswer(`No results found`);
                 document.getElementById("loader").style.opacity = 0;
             } else if (query.endsWith("?")) {
