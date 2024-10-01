@@ -29,30 +29,73 @@ var widgets = [
             }
     
             return `
-                <div>
+                <style>
+                    #quick-answer .calculator {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin: 20px;
+                        border: 2px solid #ccc;
+                        border-radius: 10px;
+                        padding: 20px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                    }
+                    #quick-answer #display {
+                        width: 100%;
+                        height: 40px;
+                        font-size: 24px;
+                        text-align: right;
+                        border: 1px solid #aaa;
+                        border-radius: 5px;
+                        margin-bottom: 15px;
+                        padding: 5px;
+                    }
+                    #quick-answer button {
+                        width: 60px;
+                        height: 60px;
+                        font-size: 24px;
+                        margin: 5px;
+                        border: none;
+                        border-radius: 5px;
+                        background: #f0f0f0;
+                        cursor: pointer;
+                        transition: background 0.2s;
+                    }
+                    #quick-answer button:hover {
+                        background: #e0e0e0;
+                    }
+                    #quick-answer button:active {
+                        background: #d0d0d0;
+                    }
+                    #quick-answer .button-container {
+                        display: flex;
+                        justify-content: center;
+                    }
+                </style>
+                <div class="calculator">
                     <input type="text" id="display" value="${result}" readonly>
-                    <div>
+                    <div class="button-container">
                         <button onclick="appendToDisplay('1')">1</button>
                         <button onclick="appendToDisplay('2')">2</button>
                         <button onclick="appendToDisplay('3')">3</button>
                         <button onclick="appendToDisplay('+')">+</button>
                         <button onclick="appendToDisplay('(')">(</button>
                     </div>
-                    <div>
+                    <div class="button-container">
                         <button onclick="appendToDisplay('4')">4</button>
                         <button onclick="appendToDisplay('5')">5</button>
                         <button onclick="appendToDisplay('6')">6</button>
                         <button onclick="appendToDisplay('-')">-</button>
                         <button onclick="appendToDisplay(')')">)</button>
                     </div>
-                    <div>
+                    <div class="button-container">
                         <button onclick="appendToDisplay('7')">7</button>
                         <button onclick="appendToDisplay('8')">8</button>
                         <button onclick="appendToDisplay('9')">9</button>
                         <button onclick="appendToDisplay('*')">*</button>
                         <button onclick="appendToDisplay('^')">^</button>
                     </div>
-                    <div>
+                    <div class="button-container">
                         <button onclick="clearDisplay()">C</button>
                         <button onclick="appendToDisplay('0')">0</button>
                         <button onclick="calculateResult()">=</button>
