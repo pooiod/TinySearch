@@ -15,6 +15,8 @@ function showwidget(query) {
         }
     }
 
+    document.getElementById("loader").style.top = "80%";
+
     if (typeof html.function === 'string') {
         const script = document.createElement('script');
         script.src = html.function;
@@ -23,21 +25,19 @@ function showwidget(query) {
             if (typeof main === 'function') {
                 html = main(query);
                 if (html) {
-                    document.getElementById("loader").style.top = "80%";
                     displayQuickAnswer(html, true);
                 }
             } else {
                 console.error("Function main is not defined.");
             }
         };
-        
+
         document.head.appendChild(script);
     } else {
         html = html.function(query);
     }
 
     if (html) {
-        document.getElementById("loader").style.top = "80%";
         displayQuickAnswer(html, true);
     }
 }
