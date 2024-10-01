@@ -243,7 +243,7 @@
             overflow-y: auto;
             position: fixed;
             top: 60px;
-            right: 50px;
+            left: 90px;
             background-color: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             z-index: 99999999999999999999999;
@@ -538,7 +538,10 @@
     document.getElementById('search-input').addEventListener('input', async function() {
         const query = this.value;
         if (query.length < 2) {
-            document.getElementById('suggestions').style.display = 'none';
+            document.getElementById('suggestions').style.opacity = '0';
+            setTimeout(function(){
+                document.getElementById('suggestions').style.display = 'none';
+            }, 300);
             return;
         }
 
@@ -553,7 +556,10 @@
                 div.classList.add('suggestion-item');
                 div.addEventListener('click', function() {
                     searchInput.value = item;
-                    document.getElementById('suggestions').style.display = 'none';
+                    document.getElementById('suggestions').style.opacity = '0';
+                    setTimeout(function(){
+                        document.getElementById('suggestions').style.display = 'none';
+                    }, 300);
                     document.getElementById('search-input').focus();
                 });
                 document.getElementById('suggestions').appendChild(div);
@@ -579,7 +585,10 @@
 
     // document.getElementById('search-input').addEventListener('focus', function() {
     //     if (document.getElementById('suggestions').childNodes.length > 0) {
-    //         document.getElementById('suggestions').style.display = 'block';
+    //         document.getElementById('suggestions').style.opacity = '0';
+    //         setTimeout(function(){
+    //             document.getElementById('suggestions').style.display = 'none';
+    //         }, 300);
     //     }
     // });
 
