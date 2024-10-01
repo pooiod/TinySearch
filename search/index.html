@@ -678,14 +678,14 @@ Try to include resource links aswell.`, "gpt-4o");
             const parser = new DOMParser();
             const doc = parser.parseFromString(text, "text/html");
 
+            quickanswer(text);
+
             const links = Array.from(doc.querySelectorAll('a')).map(link => {
                 const titleElement = link.querySelector('font[size="4"]');
                 const title = titleElement ? titleElement.textContent : '';
                 const url = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
                 return { title, url };
             }).filter(link => link.url);
-
-            quickanswer(text);
 
             const results = [];
             for (const link of links) {
