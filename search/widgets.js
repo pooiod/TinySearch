@@ -1,6 +1,6 @@
 var widgets = [
     {
-        "regex": ".*calculator.*|^[0-9+\\-*/().\\s]+$",
+        "regex": ".*calculator.*|^[0-9+\\-*/^().\\sπpi]+$",
         "function": function(query) {
             window.appendToDisplay = function(value) {
                 document.getElementById('display').value += value;
@@ -11,16 +11,18 @@ var widgets = [
             window.calculateResult = function() {
                 const display = document.getElementById('display');
                 try {
-                    display.value = Function('"use strict"; return (' + display.value + ')')(); // Follows PEMDAS
+                    let expression = display.value.replace(/π/g, 'Math.PI').replace(/\^/g, '**');
+                    display.value = Function('"use strict"; return (' + expression + ')')();
                 } catch (e) {
                     display.value = "Error";
                 }
             };
     
             let result = "";
-            if (/^[0-9+\-*/().\s]+$/.test(query)) {
+            if (/^[0-9+\-*/^().\sπpi]+$/.test(query)) {
                 try {
-                    result = Function('"use strict"; return (' + query + ')')(); // Solve using PEMDAS
+                    let expression = query.replace(/π/g, 'Math.PI').replace(/\^/g, '**'); // Replace ^ with ** and π with Math.PI
+                    result = Function('"use strict"; return (' + expression + ')')();
                 } catch (e) {
                     result = "Error";
                 }
@@ -52,6 +54,8 @@ var widgets = [
                         <button onclick="appendToDisplay('0')">0</button>
                         <button onclick="calculateResult()">=</button>
                         <button onclick="appendToDisplay('/')">/</button>
+                        <button onclick="appendToDisplay('π')">π</button>
+                        <button onclick="appendToDisplay('^')">^</button>
                     </div>
                 </div>
             `;
