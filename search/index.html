@@ -21,12 +21,6 @@
                 alwaysShow: true
             },
             { 
-                name: "Images", link: "?images=true&q=%s", 
-                regex: null,
-                tags: ["image", "gif", "png", "transparent", "webp"],
-                alwaysShow: true
-            },
-            { 
                 name: "Scratch", link: "https://scratch.mit.edu/search/projects?q=%s", 
                 regex: /(\bin scratch\b|\bon scratch\b|\bscratch project\b)/gi,
                 tags: [
@@ -69,6 +63,14 @@
                 alwaysShow: false
             }
         ];
+        if (!getQueryParameter(images)) {
+            otherSearchEngines.push(            { 
+                name: "Images", link: "?images=true&q=%s", 
+                regex: null,
+                tags: ["image", "gif", "png", "transparent", "webp"],
+                alwaysShow: true
+            });
+        }
     </script>
 
     <style>
