@@ -58,6 +58,7 @@ function showwidget(query) {
     }
 
     if (html) {
+        document.getElementById("loader").style.top = "80%";
         displayQuickAnswer(html, true);
     }
 }
