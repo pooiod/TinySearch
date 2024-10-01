@@ -431,7 +431,7 @@
         if (fullurl == "/") {
             return;
         }
-        if (!image) {
+        if (!image || title) {
             image = "https://www.google.com/s2/favicons?domain=" + fullurl;
         }
 
