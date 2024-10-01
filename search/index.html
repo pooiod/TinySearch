@@ -667,7 +667,11 @@ Try to include resource links aswell.`, "gpt-4o");
             };
         });
 
-        quickanswer(gptresults);
+        try {
+            quickanswer(gptresults);
+        } catch(err) {
+            alert(err);
+        }
 
         return searchBackground(query);
 
