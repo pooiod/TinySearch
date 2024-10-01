@@ -33,7 +33,6 @@ var widgets = [
                             <button onclick="window.appendToDisplay('/')">/</button>
                         </div>
                     </div>
-                    <script>
                         window.appendToDisplay = function(value) {
                             document.getElementById('display').value += value;
                         }
@@ -44,7 +43,6 @@ var widgets = [
                             const display = document.getElementById('display');
                             display.value = eval(display.value);
                         }
-                    </script>
                 `;
             }
         }
