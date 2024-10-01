@@ -385,6 +385,7 @@
 
 <script>
     let cardIndex = 1;
+    var did = false;
 
     function getQueryParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -415,6 +416,12 @@
                 gpt.prompt(query).then(displayQuickAnswer);
             }
         });
+        setTimeout(function(){
+            if (!did) {
+                displayQuickAnswer(`Unable to find any results`);
+                document.getElementById("loader").style.opacity = 0;
+            }
+        }, 9000);
     }
 
     function displayQuickAnswer(answer, basic) {
@@ -431,6 +438,9 @@
         if (fullurl == "/") {
             return;
         }
+
+        did = true;
+        
         if (!image || title) {
             image = "https://www.google.com/s2/favicons?domain=" + fullurl;
         }
