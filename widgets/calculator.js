@@ -1,4 +1,4 @@
-function main(query) {
+window.main = function(query) {
     window.appendToDisplay = function(value) {
         document.getElementById('display').value += value;
     };

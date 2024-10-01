@@ -5,7 +5,7 @@ var widgets = [
     }
 ]
 
-async function showwidget(query) {
+function showwidget(query) {
     var html;
 
     for (var i = 0; i < widgets.length; i++) {
@@ -16,10 +16,22 @@ async function showwidget(query) {
     }
 
     if (typeof html.function === 'string') {
-        const response = await fetch(html.function);
-        const code = await response.text();
-        const func = new Function("query", code.match(/function\s+main\s*\(query\)\s*\{([\s\S]*?)\}/)[1]);
-        html = func(query);
+        const script = document.createElement('script');
+        script.src = html.function;
+
+        script.onload = function() {
+            if (typeof main === 'function') {
+                html = main(query);
+                if (html) {
+                    document.getElementById("loader").style.top = "80%";
+                    displayQuickAnswer(html, true);
+                }
+            } else {
+                console.error("Function main is not defined.");
+            }
+        };
+        
+        document.head.appendChild(script);
     } else {
         html = html.function(query);
     }
