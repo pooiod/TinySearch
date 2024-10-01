@@ -395,7 +395,7 @@
     function quickanswer(data) {
         const quickAnswerDiv = document.getElementById('quick-answer');
         quickAnswerDiv.style.opacity = '0';
-        quickAnswerDiv.style.transform = 'translateY(-100)';
+        setTimeout(function(){quickAnswerDiv.style.display = "none";}, 200);
 
         gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. 
 You may not list your name, or that you are a bot, or anything about yourself, just answer based on the results. 
