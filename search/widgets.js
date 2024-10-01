@@ -21,7 +21,7 @@ var widgets = [
             let result = "";
             if (/^[0-9+\-*/^().\sπpi]+$/.test(query)) {
                 try {
-                    let expression = query.replace(/π/g, 'Math.PI').replace(/\^/g, '**'); // Replace ^ with ** and π with Math.PI
+                    let expression = query.replace(/π/g, 'Math.PI').replace(/\^/g, '**');
                     result = Function('"use strict"; return (' + expression + ')')();
                 } catch (e) {
                     result = "Error";
@@ -36,18 +36,21 @@ var widgets = [
                         <button onclick="appendToDisplay('2')">2</button>
                         <button onclick="appendToDisplay('3')">3</button>
                         <button onclick="appendToDisplay('+')">+</button>
+                        <button onclick="appendToDisplay('(')">(</button>
                     </div>
                     <div>
                         <button onclick="appendToDisplay('4')">4</button>
                         <button onclick="appendToDisplay('5')">5</button>
                         <button onclick="appendToDisplay('6')">6</button>
                         <button onclick="appendToDisplay('-')">-</button>
+                        <button onclick="appendToDisplay(')')">)</button>
                     </div>
                     <div>
                         <button onclick="appendToDisplay('7')">7</button>
                         <button onclick="appendToDisplay('8')">8</button>
                         <button onclick="appendToDisplay('9')">9</button>
                         <button onclick="appendToDisplay('*')">*</button>
+                        <button onclick="appendToDisplay('^')">^</button>
                     </div>
                     <div>
                         <button onclick="clearDisplay()">C</button>
@@ -55,7 +58,6 @@ var widgets = [
                         <button onclick="calculateResult()">=</button>
                         <button onclick="appendToDisplay('/')">/</button>
                         <button onclick="appendToDisplay('π')">π</button>
-                        <button onclick="appendToDisplay('^')">^</button>
                     </div>
                 </div>
             `;
