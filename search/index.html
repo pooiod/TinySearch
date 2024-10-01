@@ -392,6 +392,16 @@
         return urlParams.get(name);
     }
 
+    function quickanswer(data) {
+        // displayQuickAnswer(`Loading quick answer...`, true);
+        gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. 
+You may not list your name, or that you are a bot, or anything about yourself, just answer based on the results. 
+Keep it short and simple. Also, use html formatting for your text, not mardown.
+Try to include resource links aswell.`, "gpt-4o");
+        gpt.inform("Search results: " + JSON.stringify(data));
+        gpt.prompt(query).then(displayQuickAnswer);
+    }
+
     function performSearch(query) {
         document.getElementById("loader").style.opacity = 1;
 
@@ -407,13 +417,6 @@
                 displayQuickAnswer(`No results found`);
                 document.getElementById("loader").style.opacity = 0;
             } else if (query.endsWith("?")) {
-                displayQuickAnswer(`Loading quick answer...`, true);
-                gpt.int(`Your job is to do nothing but take the search results you are given, and give an answer to the question rovided by the user. 
-                You may not list your name, or that you are a bot, or anything about yourself, just answer based on the results. 
-                Keep it short and simple. Also, use html formatting for your text, not mardown.
-                Try to include resource links aswell.`, "gpt-4o");
-                gpt.inform("Search results: " + JSON.stringify(results));
-                gpt.prompt(query).then(displayQuickAnswer);
             }
         });
         setTimeout(function(){
@@ -681,6 +684,8 @@
                 const url = link.getAttribute('href')?.replace('/read.php?a=', '') || '';
                 return { title, url };
             }).filter(link => link.url);
+
+            quickanswer(text);
 
             const results = [];
             for (const link of links) {
