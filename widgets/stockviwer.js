@@ -34,7 +34,7 @@ window.widgetmain = function(query) {
     });    
     return `
 <style>
-    #stockFrame { border: none; width: 100%; height: 300px; margin-top: 20px; }
+    #stockFrame { border: none; width: 100%; height: 350px; margin-top: 20px; }
     #stockInput { padding: 8px; font-size: 16px; width: 80%; display: inline-block; }
     #stockButton { padding: 10px; font-size: 16px; cursor: pointer; display: inline-block; }
 </style>
