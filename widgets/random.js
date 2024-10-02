@@ -1,11 +1,31 @@
 window.widgetmain = function(query) {
+    const parseQuery = (query) => {
+        const numbers = query.match(/-?\d+/g) || [];
+        return numbers.map(Number);
+    };
+
+    const numbers = parseQuery(query);
+    let min, max;
+
+    if (numbers.length === 2) {
+        [min, max] = numbers;
+    } else if (numbers.length === 1) {
+        min = 0;
+        max = numbers[0];
+    } else {
+        min = 0;
+        max = 1; // Default case if no numbers found
+    }
+
+    const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
     const html = `
         <div id="quick-answer">
             <h2>Random Number Generator</h2>
-            <input type="number" id="input1" placeholder="Enter minimum" />
-            <input type="number" id="input2" placeholder="Enter maximum" />
+            <input type="number" id="input1" value="${min}" />
+            <input type="number" id="input2" value="${max}" />
             <button id="generateButton">Generate Random Number</button>
-            <p id="result"></p>
+            <p id="result">Random Number: ${randomNum}</p>
         </div>
         <style>
             #quick-answer {
@@ -38,7 +58,6 @@ window.widgetmain = function(query) {
         </style>
     `;
 
-    // Assigning the generate function to the window object
     window.generateRandomNumber = function() {
         const min = parseInt(document.getElementById('input1').value);
         const max = parseInt(document.getElementById('input2').value);
@@ -50,7 +69,6 @@ window.widgetmain = function(query) {
         document.getElementById('result').innerText = 'Random Number: ' + randomNum;
     };
 
-    // Attach the click event after HTML is rendered
     setTimeout(() => {
         document.getElementById('generateButton').onclick = window.generateRandomNumber;
     }, 0);
