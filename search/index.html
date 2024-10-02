@@ -88,8 +88,12 @@
         
         var widgets = [
             {
-                "regex": ".*calculator.*|^[0-9+\\-*/^().\\sπpi]+$",
-                "function": "/widgets/calculator.js"
+                regex: ".*calculator.*|^[0-9+\\-*/^().\\sπpi]+$",
+                function: "/widgets/calculator.js"
+            },
+            {
+                regex: "^random number(?: from)?(?: -?\d+ (?:to )?-?\d+)?(?: from -?\d+ (?:to )?-?\d+)?$",
+                function: "/widgets/random.js"
             }
         ];
     </script>
