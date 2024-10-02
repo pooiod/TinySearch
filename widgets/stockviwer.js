@@ -13,29 +13,25 @@ window.widgetmain = function(query) {
         }
     }, 500);
     window.addEventListener('message', function(event) {
-        setTimeout(function(){
-            if (event.data === 'unblockerloaded') {
-                const symbol = document.getElementById('stockInput').value.trim();
-                if (symbol === '') return;
-                
-                window.imgUrl = `https://pinhole.finance.yahoo.com/chart/${symbol.toUpperCase()}/__screenshot`;
-                const iframe = document.getElementById('stockFrame');
+        if (event.data === 'unblockerloaded') {
+            if (document.getElementById('stockInput').value.trim() === '') return;
+            
+            const iframe = document.getElementById('stockFrame');
 
-                iframe.opacity = 0;
-                
-                const img = new Image();
-                img.src = imgUrl;
-                
-                img.onload = () => {
-                    window.open(imgURL)
-                    iframe.src = imgUrl;
-                };
-                
-                img.onerror = () => {
-                    iframe.src = "data:text/plain,This widget has been blocked :("; 
-                };
-            }
-        }, 500);
+            iframe.opacity = 0;
+            
+            const img = new Image();
+            img.src = `https://pinhole.finance.yahoo.com/chart/${document.getElementById('stockInput').value.trim().toUpperCase()}/__screenshot`;
+            
+            img.onload = () => {
+                window.open(img.src)
+                iframe.src = img.src;
+            };
+            
+            img.onerror = () => {
+                iframe.src = "data:text/plain,This widget has been blocked :("; 
+            };
+        }
     });    
     return `
 <style>
