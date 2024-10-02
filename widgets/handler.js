@@ -1,23 +1,16 @@
-var widgets = [
-    {
-        "regex": ".*calculator.*|^[0-9+\\-*/^().\\sπpi]+$",
-        "function": "/widgets/calculator.js"
-    }
-]
 
 function showwidget(query) {
     var html;
 
     for (var i = 0; i < widgets.length; i++) {
         if (query.match(widgets[i].regex)) {
+            document.getElementById("loader").style.top = "80%";
             html = widgets[i];
             break;
         }
     }
 
-    document.getElementById("loader").style.top = "80%";
-
-    if (typeof html.function === 'string') {
+    if (html && typeof html.function === 'string') {
         const script = document.createElement('script');
         script.src = html.function;
 
@@ -33,7 +26,7 @@ function showwidget(query) {
         };
 
         document.head.appendChild(script);
-    } else {
+    } else if (html) {
         html = html.function(query);
     }
 

@@ -11,7 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://pooiod7.neocities.org/snips/GenerativeAI.js"></script>
-    <script src="widgets.js">function showwidget(query) {}</script>
+    <script src="/widgets/handler.js">function showwidget(query) {}</script>
 
     <script>
         var otherSearchEngines = [
@@ -85,6 +85,13 @@
                 alwaysShow: true
             });
         }
+        
+        var widgets = [
+            {
+                "regex": ".*calculator.*|^(?!\d$)[0-9+\-*/^().\sπpi]+$",
+                "function": "/widgets/calculator.js"
+            }
+        ];
     </script>
 
     <style>
