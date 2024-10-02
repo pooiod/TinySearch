@@ -15,6 +15,7 @@ window.widgetmain = function(query) {
     window.addEventListener('message', function(event) {
         if (event.data === 'unblockerloaded') {
             const imgUrl = `https://pinhole.finance.yahoo.com/chart/${symbol.toUpperCase()}/__screenshot`;
+            iframe.src = "Loading stock..."; 
             const iframe = document.getElementById('stockFrame');
             
             const img = new Image();
