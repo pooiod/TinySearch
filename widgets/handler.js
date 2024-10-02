@@ -6,6 +6,7 @@ function showwidget(query) {
         if (query.match(widgets[i].regex)) {
             document.getElementById("loader").style.top = "80%";
             html = widgets[i];
+            alert(query);
             break;
         }
     }
