@@ -3,7 +3,7 @@ function showwidget(query) {
     var html;
 
     for (var i = 0; i < widgets.length; i++) {
-        console.log(new RegExp(widgets[i].regex))
+        console.log(new RegExp(widgets[i].regex), new RegExp(widgets[i].regex).test(query))
         if (new RegExp(widgets[i].regex).test(query)) {
             document.getElementById("loader").style.top = "80%";
             html = widgets[i];
