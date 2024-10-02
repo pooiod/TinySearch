@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom and Pan Canvas</title>
     <style>
         body, html {
             margin: 0;
@@ -52,10 +51,17 @@
             const mouseY = e.clientY - originY;
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
 
-            scale *= zoomFactor;
-            originX = mouseX - mouseX * zoomFactor + originX;
-            originY = mouseY - mouseY * zoomFactor + originY;
-            constrainPan();
+            const newScale = scale * zoomFactor;
+            if (newScale >= 1) { // Prevent zooming out beyond original size
+                scale = newScale;
+                originX = mouseX - mouseX * zoomFactor + originX;
+                originY = mouseY - mouseY * zoomFactor + originY;
+                constrainPan();
+            } else {
+                scale = 1; // Reset scale to 1 if zoomed out too much
+                originX = (canvas.width - img.width) / 2;
+                originY = (canvas.height - img.height) / 2;
+            }
             draw();
         });
 
