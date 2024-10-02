@@ -31,10 +31,7 @@ window.widgetmain = function(query) {
             #quick-answer {
                 font-family: Arial, sans-serif;
                 text-align: center;
-                margin: 20px;
-                border: 2px solid #4CAF50;
-                padding: 20px;
-                border-radius: 10px;
+                padding: 5px;
             }
             #quick-answer input, #quick-answer button {
                 margin: 10px;
@@ -42,14 +39,10 @@ window.widgetmain = function(query) {
                 font-size: 16px;
             }
             #quick-answer button {
-                background-color: #4CAF50;
                 color: white;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
-            }
-            #quick-answer button:hover {
-                background-color: #45a049;
             }
             #quick-answer p {
                 font-size: 20px;
