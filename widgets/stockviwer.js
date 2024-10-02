@@ -14,6 +14,9 @@ window.widgetmain = function(query) {
     }, 500);
     window.addEventListener('message', function(event) {
         if (event.data === 'unblockerloaded') {
+            const symbol = document.getElementById('stockInput').value.trim();
+            if (symbol === '') return;
+            
             const imgUrl = `https://pinhole.finance.yahoo.com/chart/${symbol.toUpperCase()}/__screenshot`;
             iframe.src = "Loading stock..."; 
             const iframe = document.getElementById('stockFrame');
