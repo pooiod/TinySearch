@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom and Pan Canvas</title>
     <style>
         body, html {
             margin: 0;
@@ -30,6 +31,9 @@
         img.onload = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+            originX = (canvas.width - img.width * scale) / 2;
+            originY = (canvas.height - img.height * scale) / 2;
             draw();
         };
 
@@ -46,6 +50,7 @@
             e.preventDefault();
             const zoom = e.deltaY > 0 ? 0.9 : 1.1;
             scale *= zoom;
+            constrainPan();
             draw();
         });
 
@@ -63,6 +68,7 @@
                 originY += dy;
                 lastX = e.clientX;
                 lastY = e.clientY;
+                constrainPan();
                 draw();
             }
         });
@@ -72,8 +78,18 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+            originX = (canvas.width - img.width * scale) / 2;
+            originY = (canvas.height - img.height * scale) / 2;
             draw();
         });
+
+        function constrainPan() {
+            const maxX = (img.width * scale - canvas.width) / 2;
+            const maxY = (img.height * scale - canvas.height) / 2;
+            originX = Math.min(0, Math.max(originX, -maxX));
+            originY = Math.min(0, Math.max(originY, -maxY));
+        }
     </script>
 </body>
 </html>
