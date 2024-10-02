@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,69 +38,63 @@
     </div>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const container = document.querySelector('.container')
-        const img = document.querySelector('img')
+        const container = document.querySelector('.container');
+        const img = document.querySelector('img');
         img.src = urlParams.get('img');
 
-        let zoom = 1
+        let zoom = 1;
         container.addEventListener('wheel', e => {
-            img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`
-
-            zoom += e.deltaY * -0.01
-            zoom = Math.min(Math.max(1, zoom), 5)
-
-            if (zoom == 1) {
-                img.style.left = '0px'
-                img.style.top = '0px'
+            img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
+            zoom += e.deltaY * -0.01;
+            zoom = Math.min(Math.max(1, zoom), 5);
+            img.style.transform = `scale(${zoom})`;
+            if (zoom === 1) {
+                img.style.left = '0px';
+                img.style.top = '0px';
             }
+            checkSize();
+        });
 
-            img.style.transform = `scale(${zoom})`
-        })
+        let clicked = false;
+        let xAxis, yAxis, x, y;
 
-        let clicked = false
-        let xAxis;
-        let x;
-        let yAxis;
-        let y;
-
-        container.addEventListener('mouseup', () => container.style.cursor = 'auto')
-
+        container.addEventListener('mouseup', () => container.style.cursor = 'auto');
         container.addEventListener('mousedown', e => {
             clicked = true;
             xAxis = e.offsetX - img.offsetLeft;
             yAxis = e.offsetY - img.offsetTop;
+            container.style.cursor = 'grabbing';
+        });
 
-            container.style.cursor = 'grabbing'
-        })
-
-        window.addEventListener('mouseup', () => clicked = false)
+        window.addEventListener('mouseup', () => clicked = false);
 
         container.addEventListener('mousemove', e => {
-            if (!clicked) return
-            e.preventDefault()
+            if (!clicked) return;
+            e.preventDefault();
+            x = e.offsetX;
+            y = e.offsetY;
 
-            x = e.offsetX
-            y = e.offsetY
+            img.style.left = `${x - xAxis}px`;
+            img.style.top = `${y - yAxis}px`;
 
-            img.style.left = `${x - xAxis}px`
-            img.style.top = `${y - yAxis}px`
+            checkSize();
+        });
 
-            checkSize()
-        })
+        function checkSize() {
+            const containerOut = container.getBoundingClientRect();
+            const imgIn = img.getBoundingClientRect();
+            const imgLeft = parseInt(img.style.left) || 0;
+            const imgTop = parseInt(img.style.top) || 0;
 
-        function checkSize () {
-            let containerOut = container.getBoundingClientRect()
-            let imgIn = img.getBoundingClientRect()
-
-            if (parseInt(img.style.left) > 0) {
-                img.style.left = '0px'
+            if (imgIn.left > containerOut.left) {
+                img.style.left = '0px';
             } else if (imgIn.right < containerOut.right) {
-                img.style.left = `-${imgIn.width - containerOut.width}px`
+                img.style.left = `${containerOut.width - imgIn.width}px`;
             }
-            if (parseInt(img.style.top) > 0) {
-                img.style.top = '0px'
+            if (imgIn.top > containerOut.top) {
+                img.style.top = '0px';
             } else if (imgIn.bottom < containerOut.bottom) {
-                img.style.top = `-${imgIn.height - containerOut.height}px`
+                img.style.top = `${containerOut.height - imgIn.height}px`;
             }
         }
     </script>
