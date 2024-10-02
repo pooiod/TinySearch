@@ -7,7 +7,7 @@ window.widgetmain = function(query) {
             const iframeSrc = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12345&symbol=${symbol.toUpperCase()}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=light&style=1&timezone=exchange&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en`;
             document.getElementById('stockFrame').src = iframeSrc;
         });
-        if (query.match("^\w+ stock( view| price| market)?$")) {
+        if (query.match("^\\w+ stock( view| price| market)?$")) {
             document.getElementById('stockInput').value = str => str.split(' ')[0];
             document.getElementById('stockButton').click();
         }
