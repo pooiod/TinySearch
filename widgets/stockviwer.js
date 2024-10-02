@@ -14,7 +14,19 @@ window.widgetmain = function(query) {
     }, 500);
     window.addEventListener('message', function(event) {
         if (event.data === 'unblockerloaded') {
-            document.getElementById('stockFrame').src = "data:txt,This widget has been blocked :(";
+            const imgUrl = `https://pinhole.finance.yahoo.com/chart/${symbol.toUpperCase()}/__screenshot`;
+            const iframe = document.getElementById('stockFrame');
+            
+            const img = new Image();
+            img.src = imgUrl;
+            
+            img.onload = () => {
+                iframe.src = imgUrl;
+            };
+            
+            img.onerror = () => {
+                iframe.src = "data:text/plain,This widget has been blocked :("; 
+            };
         }
     });    
     return `
