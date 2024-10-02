@@ -515,7 +515,9 @@ Try to include resource links aswell.`, "gpt-4o");
         quickAnswerDiv.style.opacity = '0';
         quickAnswerDiv.style.transform = 'translateY(-100)';
 
-        document.getElementById('suggestions').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('suggestions').style.opacity = '0';
+        }, 30);
         
         // setTimeout(() => {
         //     quickAnswerDiv.style.opacity = '1';
