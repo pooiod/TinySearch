@@ -44,7 +44,9 @@
 
         let zoom = 1;
         container.addEventListener('wheel', e => {
-            img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
+            const rect = img.getBoundingClientRect();
+            img.style.transformOrigin = `${e.offsetX + rect.left}px ${e.offsetY + rect.top}px`;
+            
             zoom += e.deltaY * -0.01;
             zoom = Math.min(Math.max(1, zoom), 5);
             img.style.transform = `scale(${zoom})`;
@@ -52,7 +54,6 @@
                 img.style.left = '0px';
                 img.style.top = '0px';
             }
-            // checkSize();
         });
 
         let clicked = false;
@@ -77,10 +78,9 @@
             img.style.left = `${x - xAxis}px`;
             img.style.top = `${y - yAxis}px`;
 
-            // checkSize();
         });
 
-        function checkSize() {
+        function checkSize() { // ignored for now
             const containerOut = container.getBoundingClientRect();
             const imgIn = img.getBoundingClientRect();
             const imgLeft = parseInt(img.style.left) || 0;
