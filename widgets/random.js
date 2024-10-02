@@ -4,6 +4,8 @@ window.widgetmain = function(query) {
         return numbers.map(Number);
     };
 
+    document.getElementById("loader").style.top = "70%";
+
     const numbers = parseQuery(query);
     let min, max;
 
