@@ -45,7 +45,11 @@
         let zoom = 1;
         container.addEventListener('wheel', e => {
             const rect = img.getBoundingClientRect();
-            img.style.transformOrigin = `${e.offsetX + rect.left}px ${e.offsetY + rect.top}px`;
+            const zoomLevel = getComputedStyle(img).transform.match(/scale\(([^)]+)\)/)[1];
+            const offsetX = e.offsetX + rect.left;
+            const offsetY = e.offsetY + rect.top;
+
+            img.style.transformOrigin = `${offsetX / zoomLevel}px ${offsetY / zoomLevel}px`;
             
             zoom += e.deltaY * -0.01;
             zoom = Math.min(Math.max(1, zoom), 5);
