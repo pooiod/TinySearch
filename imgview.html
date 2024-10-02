@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom and Pan Canvas</title>
     <style>
         body, html {
             margin: 0;
@@ -52,8 +53,16 @@
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
 
             scale *= zoomFactor;
-            originX = mouseX - mouseX * zoomFactor + originX;
-            originY = mouseY - mouseY * zoomFactor + originY;
+
+            // Adjust the origin to keep the image centered
+            if (scale < 1) {
+                originX = (canvas.width - img.width * scale) / 2;
+                originY = (canvas.height - img.height * scale) / 2;
+            } else {
+                originX = mouseX - mouseX * zoomFactor + originX;
+                originY = mouseY - mouseY * zoomFactor + originY;
+            }
+
             constrainPan();
             draw();
         });
@@ -82,7 +91,9 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            resetPosition();
+            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+            originX = (canvas.width - img.width * scale) / 2;
+            originY = (canvas.height - img.height * scale) / 2;
             draw();
         });
 
@@ -91,12 +102,6 @@
             const maxY = (img.height * scale - canvas.height) / 2;
             originX = Math.min(0, Math.max(originX, -maxX));
             originY = Math.min(0, Math.max(originY, -maxY));
-        }
-
-        function resetPosition() {
-            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-            originX = (canvas.width - img.width * scale) / 2;
-            originY = (canvas.height - img.height * scale) / 2;
         }
     </script>
 </body>
