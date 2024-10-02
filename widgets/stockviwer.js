@@ -12,18 +12,6 @@ window.widgetmain = function(query) {
             document.getElementById('stockButton').click();
         }
     }, 500);
-
-    var iframe = document.createElement('iframe');
-iframe.src = 'https://userscripts.org';
-iframe.style.position = 'fixed';
-iframe.style.top = '0';
-iframe.style.left = '0';
-iframe.style.width = '100%';
-iframe.style.height = '100%';
-iframe.style.border = 'none';
-document.body.appendChild(iframe);
-document.documentElement.style.overflow = 'hidden';
-
     return `
 <style>
     #stockFrame { border: none; width: 100%; height: 300px; margin-top: 20px; }
