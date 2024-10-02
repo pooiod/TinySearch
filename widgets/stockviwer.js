@@ -18,7 +18,7 @@ window.widgetmain = function(query) {
                 const symbol = document.getElementById('stockInput').value.trim();
                 if (symbol === '') return;
                 
-                const imgUrl = `https://pinhole.finance.yahoo.com/chart/${symbol.toUpperCase()}/__screenshot`;
+                window.imgUrl = `https://pinhole.finance.yahoo.com/chart/${symbol.toUpperCase()}/__screenshot`;
                 const iframe = document.getElementById('stockFrame');
 
                 iframe.opacity = 0;
