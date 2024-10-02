@@ -14,8 +14,8 @@ window.widgetmain = function(query) {
     }, 500);
     return `
 <style>
-    #stockFrame { border: none; width: 80%; height: 600px; margin-top: 20px; }
-    #stockInput { padding: 8px; font-size: 16px; }
+    #stockFrame { border: none; width: 80%; height: 400px; margin-top: 20px; }
+    #stockInput { padding: 8px; font-size: 16px; width: 100%; }
     #stockButton { padding: 10px; font-size: 16px; cursor: pointer; }
 </style>
 <h1>Stock Price Viewer</h1>
