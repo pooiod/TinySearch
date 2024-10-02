@@ -29,6 +29,9 @@ window.widgetmain = function(query) {
 
     return `
         <style>
+            #quick-answer {
+                min-width: 350px;
+            }
             #quick-answer .calculator {
                 display: flex;
                 flex-direction: column;
