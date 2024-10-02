@@ -25,6 +25,7 @@ window.widgetmain = function(query) {
             
             img.onload = () => {
                 iframe.src = "/imgview.html?img=" + img.src;
+                iframe.style.height = "500px";
             };
             
             img.onerror = () => {
