@@ -44,6 +44,7 @@
 
         let zoom = 1;
         container.addEventListener('wheel', e => {
+            e.preventDefault();
             // img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
             zoom += e.deltaY * -0.005;
             zoom = Math.min(Math.max(1, zoom), 5);
