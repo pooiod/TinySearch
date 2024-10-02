@@ -15,11 +15,12 @@ window.widgetmain = function(query) {
     return `
 <style>
     #stockFrame { border: none; width: 80%; height: 400px; margin-top: 20px; }
-    #stockInput { padding: 8px; font-size: 16px; width: 100%; }
-    #stockButton { padding: 10px; font-size: 16px; cursor: pointer; }
+    #stockInput { padding: 8px; font-size: 16px; width: 80%; display: inline-block; }
+    #stockButton { padding: 10px; font-size: 16px; cursor: pointer; display: inline-block; }
 </style>
 <h1>Stock Price Viewer</h1>
 <input type="text" id="stockInput" placeholder="Enter stock symbol (e.g., AAPL)">
 <button id="stockButton">Get Stock Price</button>
-<iframe id="stockFrame" src="data:txt,Choose a company to view" allowfullscreen></iframe>`;
+<iframe id="stockFrame" src="data:txt,Choose a company to view" allowfullscreen></iframe>
+`;
 }
