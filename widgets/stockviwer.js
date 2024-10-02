@@ -27,7 +27,7 @@ window.widgetmain = function(query) {
             };
             
             img.onerror = () => {
-                iframe.src = "data:text/plain,This widget has been blocked :("; 
+                iframe.src = "data:text/plain,Unable to find stock price"; 
             };
         }
     });    
