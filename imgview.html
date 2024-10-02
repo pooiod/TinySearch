@@ -2,106 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom and Pan Canvas</title>
-    <style>
-        body, html {
-            margin: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-        canvas {
-            display: block;
-            background-color: #f0f0f0;
-        }
-    </style>
+    <title>Advanced Image Viewer</title>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    <div class="container">
+        <img src="https://unsplash.it/3000/2000">
+    </div>
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
         const urlParams = new URLSearchParams(window.location.search);
+        const container = document.querySelector('.container')
+        const img = document.querySelector('img')
         img.src = urlParams.get('img');
 
-        let scale = 1, originX = 0, originY = 0;
-        let isPanning = false, lastX, lastY;
+        let zoom = 1
+        container.addEventListener('wheel', e => {
+            img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`
 
-        img.onload = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-            originX = (canvas.width - img.width * scale) / 2;
-            originY = (canvas.height - img.height * scale) / 2;
-            draw();
-        };
+            zoom += e.deltaY * -0.01
+            zoom = Math.min(Math.max(1, zoom), 5)
 
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.save();
-            ctx.translate(originX, originY);
-            ctx.scale(scale, scale);
-            ctx.drawImage(img, 0, 0);
-            ctx.restore();
-        }
-
-        canvas.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const mouseX = e.clientX - originX;
-            const mouseY = e.clientY - originY;
-            const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-
-            scale *= zoomFactor;
-
-            // Adjust the origin to keep the image centered
-            if (scale < 1) {
-                originX = (canvas.width - img.width * scale) / 2;
-                originY = (canvas.height - img.height * scale) / 2;
-            } else {
-                originX = mouseX - mouseX * zoomFactor + originX;
-                originY = mouseY - mouseY * zoomFactor + originY;
+            if (zoom == 1) {
+                img.style.left = '0px'
+                img.style.top = '0px'
             }
 
-            constrainPan();
-            draw();
-        });
+            img.style.transform = `scale(${zoom})`
+        })
 
-        canvas.addEventListener('mousedown', (e) => {
-            isPanning = true;
-            lastX = e.clientX;
-            lastY = e.clientY;
-        });
+        let clicked = false
+        let xAxis;
+        let x;
+        let yAxis;
+        let y;
 
-        canvas.addEventListener('mousemove', (e) => {
-            if (isPanning) {
-                const dx = e.clientX - lastX;
-                const dy = e.clientY - lastY;
-                originX += dx;
-                originY += dy;
-                lastX = e.clientX;
-                lastY = e.clientY;
-                constrainPan();
-                draw();
+        container.addEventListener('mouseup', () => container.style.cursor = 'auto')
+
+        container.addEventListener('mousedown', e => {
+            clicked = true;
+            xAxis = e.offsetX - img.offsetLeft;
+            yAxis = e.offsetY - img.offsetTop;
+
+            container.style.cursor = 'grabbing'
+        })
+
+        window.addEventListener('mouseup', () => clicked = false)
+
+        container.addEventListener('mousemove', e => {
+            if (!clicked) return
+            e.preventDefault()
+
+            x = e.offsetX
+            y = e.offsetY
+
+            img.style.left = `${x - xAxis}px`
+            img.style.top = `${y - yAxis}px`
+
+            checkSize()
+        })
+
+        function checkSize () {
+            let containerOut = container.getBoundingClientRect()
+            let imgIn = img.getBoundingClientRect()
+
+            if (parseInt(img.style.left) > 0) {
+                img.style.left = '0px'
+            } else if (imgIn.right < containerOut.right) {
+                img.style.left = `-${imgIn.width - containerOut.width}px`
             }
-        });
-
-        canvas.addEventListener('mouseup', () => isPanning = false);
-        canvas.addEventListener('mouseout', () => isPanning = false);
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-            originX = (canvas.width - img.width * scale) / 2;
-            originY = (canvas.height - img.height * scale) / 2;
-            draw();
-        });
-
-        function constrainPan() {
-            const maxX = (img.width * scale - canvas.width) / 2;
-            const maxY = (img.height * scale - canvas.height) / 2;
-            originX = Math.min(0, Math.max(originX, -maxX));
-            originY = Math.min(0, Math.max(originY, -maxY));
+            if (parseInt(img.style.top) > 0) {
+                img.style.top = '0px'
+            } else if (imgIn.bottom < containerOut.bottom) {
+                img.style.top = `-${imgIn.height - containerOut.height}px`
+            }
         }
     </script>
 </body>
