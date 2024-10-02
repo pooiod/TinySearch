@@ -26,8 +26,11 @@
 
         let scale = 1, originX = 0, originY = 0;
         let isPanning = false, lastX, lastY;
+        let originalWidth, originalHeight;
 
         img.onload = () => {
+            originalWidth = img.width;
+            originalHeight = img.height;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             scale = Math.min(canvas.width / img.width, canvas.height / img.height);
@@ -52,16 +55,18 @@
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
 
             const newScale = scale * zoomFactor;
-            if (newScale >= 1) { // Prevent zooming out beyond original size
+
+            if (newScale < 1) {
+                scale = 1;
+                originX = (canvas.width - originalWidth) / 2;
+                originY = (canvas.height - originalHeight) / 2;
+            } else {
                 scale = newScale;
                 originX = mouseX - mouseX * zoomFactor + originX;
                 originY = mouseY - mouseY * zoomFactor + originY;
                 constrainPan();
-            } else {
-                scale = 1; // Reset scale to 1 if zoomed out too much
-                originX = (canvas.width - img.width) / 2;
-                originY = (canvas.height - img.height) / 2;
             }
+
             draw();
         });
 
