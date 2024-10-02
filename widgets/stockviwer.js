@@ -8,7 +8,7 @@ window.widgetmain = function(query) {
             document.getElementById('stockFrame').src = iframeSrc;
         });
         if (query.match("^\\w+ stock( view| price| market)?$")) {
-            document.getElementById('stockInput').value = str => str.split(' ')[0];
+            document.getElementById('stockInput').value = query.split(' ')[0];
             document.getElementById('stockButton').click();
         }
     }, 500);
