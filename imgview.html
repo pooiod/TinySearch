@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom and Pan Canvas</title>
     <style>
         body, html {
             margin: 0;
@@ -26,11 +27,8 @@
 
         let scale = 1, originX = 0, originY = 0;
         let isPanning = false, lastX, lastY;
-        let originalWidth, originalHeight;
 
         img.onload = () => {
-            originalWidth = img.width;
-            originalHeight = img.height;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             scale = Math.min(canvas.width / img.width, canvas.height / img.height);
@@ -54,19 +52,10 @@
             const mouseY = e.clientY - originY;
             const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
 
-            const newScale = scale * zoomFactor;
-
-            if (newScale < 1) {
-                scale = 1;
-                originX = (canvas.width - originalWidth) / 2;
-                originY = (canvas.height - originalHeight) / 2;
-            } else {
-                scale = newScale;
-                originX = mouseX - mouseX * zoomFactor + originX;
-                originY = mouseY - mouseY * zoomFactor + originY;
-                constrainPan();
-            }
-
+            scale *= zoomFactor;
+            originX = mouseX - mouseX * zoomFactor + originX;
+            originY = mouseY - mouseY * zoomFactor + originY;
+            constrainPan();
             draw();
         });
 
@@ -94,9 +83,7 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-            originX = (canvas.width - img.width * scale) / 2;
-            originY = (canvas.height - img.height * scale) / 2;
+            resetPosition();
             draw();
         });
 
@@ -105,6 +92,12 @@
             const maxY = (img.height * scale - canvas.height) / 2;
             originX = Math.min(0, Math.max(originX, -maxX));
             originY = Math.min(0, Math.max(originY, -maxY));
+        }
+
+        function resetPosition() {
+            scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+            originX = (canvas.width - img.width * scale) / 2;
+            originY = (canvas.height - img.height * scale) / 2;
         }
     </script>
 </body>
