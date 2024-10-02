@@ -14,7 +14,7 @@ window.widgetmain = function(query) {
         max = numbers[0];
     } else {
         min = 0;
-        max = 1; // Default case if no numbers found
+        max = 100;
     }
 
     const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
