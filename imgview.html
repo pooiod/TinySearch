@@ -48,8 +48,13 @@
 
         canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
-            const zoom = e.deltaY > 0 ? 0.9 : 1.1;
-            scale *= zoom;
+            const mouseX = e.clientX - originX;
+            const mouseY = e.clientY - originY;
+            const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+
+            scale *= zoomFactor;
+            originX = mouseX - mouseX * zoomFactor + originX;
+            originY = mouseY - mouseY * zoomFactor + originY;
             constrainPan();
             draw();
         });
