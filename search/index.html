@@ -693,10 +693,12 @@ Try to include resource links aswell.`, "gpt-4o");
             if (query.endsWith("?")) {
                 quickanswer(gptresults);
             } else {
-                showwidget(query, results);
+                setTimeout(() => {
+                    showwidget(query, results);
+                }, 1000);
             }
         } catch(err) {
-            alert(err);
+            console.error(err);
         }
 
         return searchBackground(query);
