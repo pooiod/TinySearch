@@ -47,8 +47,9 @@ window.widgetmain = function(query) {
                 padding: 5px;
             }
             #quick-answer button {
-                max-width: 60px;
-                max-height: 60px;
+                flex: 1 1 15%;
+                width: 60px;
+                height: 60px;
                 font-size: 24px;
                 margin: 5px;
                 border: none;
