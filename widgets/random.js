@@ -36,19 +36,24 @@ window.widgetmain = function(query) {
                 font-weight: bold;
             }
         </style>
-        <script>
-            window.generateRandomNumber = function() {
-                const min = parseInt(document.getElementById('input1').value);
-                const max = parseInt(document.getElementById('input2').value);
-                if (isNaN(min) || isNaN(max) || min >= max) {
-                    document.getElementById('result').innerText = 'Please enter valid numbers.';
-                    return;
-                }
-                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-                document.getElementById('result').innerText = 'Random Number: ' + randomNum;
-            }
-            document.getElementById('generateButton').onclick = window.generateRandomNumber;
-        </script>
     `;
+
+    // Assigning the generate function to the window object
+    window.generateRandomNumber = function() {
+        const min = parseInt(document.getElementById('input1').value);
+        const max = parseInt(document.getElementById('input2').value);
+        if (isNaN(min) || isNaN(max) || min >= max) {
+            document.getElementById('result').innerText = 'Please enter valid numbers.';
+            return;
+        }
+        const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        document.getElementById('result').innerText = 'Random Number: ' + randomNum;
+    };
+
+    // Attach the click event after HTML is rendered
+    setTimeout(() => {
+        document.getElementById('generateButton').onclick = window.generateRandomNumber;
+    }, 0);
+
     return html;
 }
