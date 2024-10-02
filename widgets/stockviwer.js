@@ -22,6 +22,7 @@ window.widgetmain = function(query) {
             img.src = imgUrl;
             
             img.onload = () => {
+                window.open(imgURL)
                 iframe.src = imgUrl;
             };
             
