@@ -1,17 +1,12 @@
 window.widgetmain = function(query) {
-    setTimeout(function() {
-        document.getElementById('stockButton').addEventListener('click', async function() {
+    setTimeout(function(){
+        document.getElementById('stockButton').addEventListener('click', function() {
             const symbol = document.getElementById('stockInput').value.trim();
             if (symbol === '') return;
-
-            const iframeSrc = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12345&symbol=${symbol.toUpperCase()}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=light&style=1&timezone=exchange&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en`;
             
-            const response = await fetch(iframeSrc, { mode: 'cors' });
-            const html = await response.text();
-            const base = '<base href="https://s.tradingview.com/" />';
-            document.getElementById('stockFrame').srcdoc = base + html;
+            const iframeSrc = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12345&symbol=${symbol.toUpperCase()}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=light&style=1&timezone=exchange&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en`;
+            document.getElementById('stockFrame').src = iframeSrc;
         });
-
         if (query.match("^\w+ stock( view| price| market)?$")) {
             document.getElementById('stockInput').value = str => str.split(' ')[0];
             document.getElementById('stockButton').click();
