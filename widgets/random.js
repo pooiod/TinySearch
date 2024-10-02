@@ -20,13 +20,11 @@ window.widgetmain = function(query) {
     const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
     const html = `
-        <div id="quick-answer">
-            <h2>Random Number Generator</h2>
-            <input type="number" id="input1" value="${min}" />
-            <input type="number" id="input2" value="${max}" />
-            <button id="generateButton">Generate Random Number</button>
-            <p id="result">Random Number: ${randomNum}</p>
-        </div>
+        <h2>Random Number Generator</h2>
+        <input type="number" id="input1" value="${min}" />
+        <input type="number" id="input2" value="${max}" />
+        <button id="generateButton">Generate Random Number</button>
+        <p id="result">Random Number: ${randomNum}</p>
         <style>
             #quick-answer {
                 font-family: Arial, sans-serif;
