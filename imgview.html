@@ -29,7 +29,6 @@
             position: absolute;
             object-fit: contain;
             pointer-events: none;
-            transform: scale(1);
         }
     </style>
 </head>
@@ -45,13 +44,7 @@
 
         let zoom = 1;
         container.addEventListener('wheel', e => {
-            const rect = img.getBoundingClientRect();
-            const zoomLevel = getComputedStyle(img).transform.match(/scale\(([^)]+)\)/)[1];
-            const offsetX = e.offsetX + rect.left;
-            const offsetY = e.offsetY + rect.top;
-
-            img.style.transformOrigin = `${offsetX / zoomLevel}px ${offsetY / zoomLevel}px`;
-            
+            // img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
             zoom += e.deltaY * -0.01;
             zoom = Math.min(Math.max(1, zoom), 5);
             img.style.transform = `scale(${zoom})`;
