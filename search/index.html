@@ -88,15 +88,15 @@
         
         var widgets = [
             {
-                regex: /.*calculator.*|^[0-9+\\-*/^().\\sπpi]+$/,
+                regex: ".*calculator.*|^[0-9+\\-*/^().\\sπpi]+$",
                 function: "/widgets/calculator.js"
             },
             {
-                regex: /random number.*/,
+                regex: "random number.*",
                 function: "/widgets/random.js"
             },
             {
-                regex: /^(?:\w+ )?stock( view| price| market)?$/,
+                regex: "^(?:\\w+ )?stock( view| price| market)?$",
                 function: "/widgets/stockviwer.js"
             }
         ];
