@@ -12,6 +12,14 @@ window.widgetmain = function(query) {
             document.getElementById('stockButton').click();
         }
     }, 500);
+    window.addEventListener('message', function(event) {
+        if (event.data === 'unblockerloaded') {
+            document.getElementById('stockFrame').src = "data:txt,This widget has been blocked :(";
+            const quickAnswerDiv = document.getElementById('quick-answer');
+            quickAnswerDiv.style.opacity = '0';
+            quickAnswerDiv.style.transform = 'translateY(-100)';
+        }
+    });    
     return `
 <style>
     #stockFrame { border: none; width: 100%; height: 300px; margin-top: 20px; }
