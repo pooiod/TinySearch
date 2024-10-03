@@ -1,4 +1,4 @@
-window.widgetmain = async function(query) {
+window.widgetmain = function(query) {
     const ipPromise = (async () => {
         const ipv4Response = await fetch("https://api.ipify.org?format=json");
         const ipv4Data = await ipv4Response.json();
