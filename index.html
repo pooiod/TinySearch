@@ -162,10 +162,26 @@
                 "What’s piqued your interest?",
                 "What’s your inquiry today?"
             ];
+            const quotes2 = [
+                "Tell me about...",
+                "What was that one movie...",
+                "What does that one word mean...",
+                "Is it legal to...",
+                "How do you...",
+                "Can you explain...",
+                "What is the difference between...",
+                "What would happen if...",
+                "Is there a way to...",
+                "Where can I find..."
+            ];
         
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             const h1 = document.createElement('h1');
             h1.textContent = randomQuote;
+
+            const randomQuote2 = quotes2[Math.floor(Math.random() * quotes2.length)];
+
+            document.getElementById("searchInput").placeholder = randomQuote2;
         
             const scriptElement = document.currentScript;
             scriptElement.parentNode.insertBefore(h1, scriptElement);
