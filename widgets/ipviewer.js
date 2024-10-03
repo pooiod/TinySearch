@@ -26,10 +26,10 @@ window.widgetmain = function(query) {
                 text-align: center;
             }
             #quick-answer .ip-address {
-                font-size: 10px;
+                font-size: 20px;
                 margin: 10px 0;
                 transition: filter 0.3s;
-                filter: blur(2px);
+                filter: blur(20px);
             }
             #quick-answer .ip-address:hover {
                 filter: blur(0);
