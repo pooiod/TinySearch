@@ -7,11 +7,13 @@ window.widgetmain = async function(query) {
         return { ipv4: ipv4Data.ip, ipv6: ipv6Data.ip };
     })();
 
-    (async function() {
-        const { ipv4, ipv6 } = await ipPromise;
-        document.getElementById('ipv4').textContent = ipv4;
-        document.getElementById('ipv6').textContent = ipv6;
-    })();
+    setTimeout(function(){
+        (async function() {
+            const { ipv4, ipv6 } = await ipPromise;
+            document.getElementById('ipv4').textContent = ipv4;
+            document.getElementById('ipv6').textContent = ipv6;
+        })();
+    }, 1000);
 
     return `
         <style>
