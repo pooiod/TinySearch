@@ -1,6 +1,5 @@
 window.widgetmain = function(query) {
-    return`<iframe>
-<!DOCTYPE html>
+    var frame = `<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -52,6 +51,9 @@ var isMobile = false;
 	</div>
 </div>
 </body>
-</html>
-</iframe>`;
+</html>`;
+    setTimeout(function(){
+        document.getElementById('embedwidgetframe').contentWindow.document.body.innerHTML = html;
+    }, 1)
+    return`<iframe id="embedwidgetframe"></iframe>`;
 };
