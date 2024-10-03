@@ -1,56 +1,57 @@
 window.widgetmain = function(query) {
     const units = {
         // Length
-        m: { fullName: "Meters", conversion: 1 },
-        cm: { fullName: "Centimeters", conversion: 0.01 },
-        km: { fullName: "Kilometers", conversion: 1000 },
-        mm: { fullName: "Millimeters", conversion: 0.001 },
-        in: { fullName: "Inches", conversion: 0.0254 },
-        ft: { fullName: "Feet", conversion: 0.3048 },
-        yd: { fullName: "Yards", conversion: 0.9144 },
-        mi: { fullName: "Miles", conversion: 1609.34 },
+        m: { name: "Meters", factor: 1 },
+        cm: { name: "Centimeters", factor: 0.01 },
+        km: { name: "Kilometers", factor: 1000 },
+        mm: { name: "Millimeters", factor: 0.001 },
+        in: { name: "Inches", factor: 0.0254 },
+        ft: { name: "Feet", factor: 0.3048 },
+        yd: { name: "Yards", factor: 0.9144 },
+        mi: { name: "Miles", factor: 1609.34 },
         // Mass
-        g: { fullName: "Grams", conversion: 1 },
-        kg: { fullName: "Kilograms", conversion: 1000 },
-        mg: { fullName: "Milligrams", conversion: 0.001 },
-        oz: { fullName: "Ounces", conversion: 28.3495 },
-        lb: { fullName: "Pounds", conversion: 453.592 },
+        g: { name: "Grams", factor: 1 },
+        kg: { name: "Kilograms", factor: 1000 },
+        mg: { name: "Milligrams", factor: 0.001 },
+        oz: { name: "Ounces", factor: 28.3495 },
+        lb: { name: "Pounds", factor: 453.592 },
         // Volume
-        l: { fullName: "Liters", conversion: 1 },
-        ml: { fullName: "Milliliters", conversion: 0.001 },
-        cup: { fullName: "Cups", conversion: 0.236588 },
-        pint: { fullName: "Pints", conversion: 0.473176 },
-        quart: { fullName: "Quarts", conversion: 0.946353 },
-        gal: { fullName: "Gallons", conversion: 3.78541 },
+        l: { name: "Liters", factor: 1 },
+        ml: { name: "Milliliters", factor: 0.001 },
+        cup: { name: "Cups", factor: 0.236588 },
+        pint: { name: "Pints", factor: 0.473176 },
+        quart: { name: "Quarts", factor: 0.946353 },
+        gal: { name: "Gallons", factor: 3.78541 },
         // Temperature
-        "°C": { fullName: "Celsius", conversion: x => x + 273.15 },
-        "°F": { fullName: "Fahrenheit", conversion: x => (x - 32) * 5 / 9 + 273.15 },
-        K: { fullName: "Kelvin", conversion: x => x },
+        "°C": { name: "Celsius", factor: x => x + 273.15 },
+        "°F": { name: "Fahrenheit", factor: x => (x - 32) * 5/9 + 273.15 },
+        K: { name: "Kelvin", factor: x => x },
         // Area
-        acre: { fullName: "Acres", conversion: 4046.86 },
-        ha: { fullName: "Hectares", conversion: 10000 },
-        sqft: { fullName: "Square Feet", conversion: 0.092903 },
-        sqm: { fullName: "Square Meters", conversion: 1 },
+        acre: { name: "Acres", factor: 4046.86 },
+        ha: { name: "Hectares", factor: 10000 },
+        sqft: { name: "Square Feet", factor: 0.092903 },
+        sqm: { name: "Square Meters", factor: 1 },
         // Time
-        s: { fullName: "Seconds", conversion: 1 },
-        min: { fullName: "Minutes", conversion: 60 },
-        h: { fullName: "Hours", conversion: 3600 },
+        s: { name: "Seconds", factor: 1 },
+        min: { name: "Minutes", factor: 60 },
+        h: { name: "Hours", factor: 3600 },
         // Speed
-        'm/s': { fullName: "Meters per Second", conversion: 1 },
-        'km/h': { fullName: "Kilometers per Hour", conversion: 0.277778 },
-        'mi/h': { fullName: "Miles per Hour", conversion: 0.44704 }
+        'm/s': { name: "Meters per Second", factor: 1 },
+        'km/h': { name: "Kilometers per Hour", factor: 0.277778 },
+        'mi/h': { name: "Miles per Hour", factor: 0.44704 }
     };
 
     const convert = (value, fromUnit, toUnit) => {
-        // Prevent invalid conversions
-        if (fromUnit === "°F" && toUnit === "cm") return null;
-        if (fromUnit === "cm" && toUnit === "°F") return null;
-
-        if (fromUnit in units) {
-            const baseValue = typeof units[fromUnit].conversion === 'function' ? units[fromUnit].conversion(value) : value * units[fromUnit].conversion;
-            return toUnit in units ? baseValue / units[toUnit].conversion : null;
+        if (fromUnit === "°F" && toUnit === "cm") {
+            return null; // Prevent conversion from Fahrenheit to Centimeters
         }
-        return null;
+        if (fromUnit === "cm" && toUnit === "°F") {
+            return null; // Prevent conversion from Centimeters to Fahrenheit
+        }
+        const fromFactor = units[fromUnit].factor;
+        const toFactor = units[toUnit].factor;
+        const baseValue = typeof fromFactor === 'function' ? fromFactor(value) : value * fromFactor;
+        return toFactor(baseValue);
     };
 
     const html = `
@@ -59,24 +60,34 @@ window.widgetmain = function(query) {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                background: #f9f9f9;
                 margin: 20px;
                 padding: 20px;
-                border: 2px solid #ccc;
+                border: 2px solid #007BFF;
                 border-radius: 10px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
                 font-family: Arial, sans-serif;
             }
+            #quick-answer h2 {
+                color: #007BFF;
+                margin-bottom: 20px;
+            }
             #quick-answer input,
             #quick-answer select {
-                font-size: 18px;
+                font-size: 16px;
                 margin: 10px 0;
                 padding: 10px;
-                width: 220px;
+                width: 250px;
                 border: 1px solid #aaa;
                 border-radius: 5px;
+                transition: border-color 0.3s;
+            }
+            #quick-answer input:focus,
+            #quick-answer select:focus {
+                border-color: #007BFF;
             }
             #quick-answer button {
-                font-size: 18px;
+                font-size: 16px;
                 padding: 10px;
                 margin-top: 10px;
                 border: none;
@@ -92,23 +103,26 @@ window.widgetmain = function(query) {
             #quick-answer .result {
                 margin-top: 20px;
                 font-size: 20px;
+                color: #333;
             }
-            #quick-answer .disabled {
+            #quick-answer .error {
                 color: red;
+                margin-top: 10px;
                 font-weight: bold;
             }
         </style>
         <div class="converter-widget">
             <h2>Unit Converter</h2>
             <input type="number" id="value" placeholder="Value to convert" />
-            <select id="fromUnit" onchange="updateUI()">
-                ${Object.keys(units).map(unit => `<option value="${unit}">${units[unit].fullName}</option>`).join('')}
+            <select id="fromUnit">
+                ${Object.keys(units).map(unit => `<option value="${unit}">${units[unit].name}</option>`).join('')}
             </select>
-            <select id="toUnit" onchange="updateUI()">
-                ${Object.keys(units).map(unit => `<option value="${unit}">${units[unit].fullName}</option>`).join('')}
+            <select id="toUnit">
+                ${Object.keys(units).map(unit => `<option value="${unit}">${units[unit].name}</option>`).join('')}
             </select>
             <button id="convertButton">Convert</button>
             <div class="result" id="result">Result: </div>
+            <div class="error" id="errorMessage"></div>
         </div>
     `;
 
@@ -119,29 +133,22 @@ window.widgetmain = function(query) {
         const fromUnitSelect = document.getElementById('fromUnit');
         const toUnitSelect = document.getElementById('toUnit');
         const resultDiv = document.getElementById('result');
-
-        const updateUI = () => {
-            const fromUnit = fromUnitSelect.value;
-            const toUnit = toUnitSelect.value;
-
-            if (fromUnit === "°F" && toUnit === "cm") {
-                convertButton.disabled = true;
-                convertButton.classList.add('disabled');
-            } else {
-                convertButton.disabled = false;
-                convertButton.classList.remove('disabled');
-            }
-        };
+        const errorMessageDiv = document.getElementById('errorMessage');
 
         convertButton.onclick = function() {
             const value = parseFloat(valueInput.value);
             const fromUnit = fromUnitSelect.value;
             const toUnit = toUnitSelect.value;
             const result = convert(value, fromUnit, toUnit);
-            resultDiv.textContent = 'Result: ' + (result !== null ? result : 'Invalid conversion');
-        };
 
-        updateUI(); // Initial UI update
+            if (result !== null) {
+                resultDiv.textContent = 'Result: ' + result;
+                errorMessageDiv.textContent = ''; // Clear error message
+            } else {
+                resultDiv.textContent = 'Result: ';
+                errorMessageDiv.textContent = 'Cannot convert between ' + units[fromUnit].name + ' and ' + units[toUnit].name + '.';
+            }
+        };
     }, 0); // Use setTimeout to wait for DOM elements to be created
 
     return html;
