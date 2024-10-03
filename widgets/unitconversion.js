@@ -53,7 +53,10 @@ var isMobile = false;
 </body>
 </html>`;
     setTimeout(function(){
-        document.getElementById('embedwidgetframe').contentWindow.document.body.innerHTML = html;
+        var iframe = document.getElementById('embedwidgetframe');
+        iframe.contentWindow.document.open();
+        iframe.contentWindow.document.write(html);
+        iframe.contentWindow.document.close();        
     }, 1)
     return`<iframe id="embedwidgetframe" style="border: none; width: 100%; height: 300px;"></iframe>`;
 };
