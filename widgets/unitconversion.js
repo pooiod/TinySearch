@@ -22,7 +22,7 @@ window.widgetmain = function(query) {
         pint: 0.473176,
         quart: 0.946353,
         gal: 3.78541,
-        // Temperature (specific conversions)
+        // Temperature
         "°C": x => x + 273.15,
         "°F": x => (x - 32) * 5/9 + 273.15,
         K: x => x,
@@ -35,7 +35,6 @@ window.widgetmain = function(query) {
         s: 1,
         min: 60,
         h: 3600,
-        d: 86400,
         // Speed
         'm/s': 1,
         'km/h': 0.277778,
@@ -104,23 +103,22 @@ window.widgetmain = function(query) {
         </div>
     `;
 
-    const container = document.createElement('div');
-    container.innerHTML = html;
-
     // Event handling
-    const convertButton = container.querySelector('#convertButton');
-    const valueInput = container.querySelector('#value');
-    const fromUnitSelect = container.querySelector('#fromUnit');
-    const toUnitSelect = container.querySelector('#toUnit');
-    const resultDisplay = container.querySelector('#result');
+    setTimeout(() => {
+        const convertButton = document.getElementById('convertButton');
+        const valueInput = document.getElementById('value');
+        const fromUnitSelect = document.getElementById('fromUnit');
+        const toUnitSelect = document.getElementById('toUnit');
+        const resultDiv = document.getElementById('result');
 
-    convertButton.addEventListener('click', () => {
-        const value = parseFloat(valueInput.value);
-        const fromUnit = fromUnitSelect.value;
-        const toUnit = toUnitSelect.value;
-        const result = convert(value, fromUnit, toUnit);
-        resultDisplay.textContent = 'Result: ' + (result !== null ? result : 'Invalid conversion');
-    });
+        convertButton.onclick = function() {
+            const value = parseFloat(valueInput.value);
+            const fromUnit = fromUnitSelect.value;
+            const toUnit = toUnitSelect.value;
+            const result = convert(value, fromUnit, toUnit);
+            resultDiv.textContent = 'Result: ' + (result !== null ? result : 'Invalid conversion');
+        };
+    }, 0); // Use setTimeout to wait for DOM elements to be created
 
-    return container.innerHTML; // Return the generated HTML
+    return html;
 };
