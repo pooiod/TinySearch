@@ -1,5 +1,5 @@
 
-function showwidget(query) {
+function showwidget(query, results) {
     var html;
 
     for (var i = 0; i < widgets.length; i++) {
@@ -16,7 +16,7 @@ function showwidget(query) {
 
         script.onload = function() {
             if (typeof widgetmain === 'function') {
-                html = widgetmain(query);
+                html = widgetmain(query, results);
                 if (html) {
                     displayQuickAnswer(html, true);
                 }
@@ -27,7 +27,7 @@ function showwidget(query) {
 
         document.head.appendChild(script);
     } else if (html) {
-        html = html.function(query);
+        html = html.function(query, results);
     }
 
     if (html) {

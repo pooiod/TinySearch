@@ -1,4 +1,4 @@
-window.widgetmain = function(query) {
+window.widgetmain = function(query, results) {
     setTimeout(function(){
         document.getElementById('stockButton').addEventListener('click', function() {
             const symbol = document.getElementById('stockInput').value.trim();
@@ -15,11 +15,17 @@ window.widgetmain = function(query) {
     window.addEventListener('message', function(event) {
         if (event.data === 'unblockerloaded') {
             if (document.getElementById('stockInput').value.trim() === '') return;
+            var yahoolink = JSON.stringify(results).match(/https:\/\/pinhole\.finance\.yahoo\.com.*?\/__screenshot/g);
             
             const iframe = document.getElementById('stockFrame');
             
             const img = new Image();
-            img.src = `https://pinhole.finance.yahoo.com/chart/${document.getElementById('stockInput').value.trim().toUpperCase()}/__screenshot`;
+
+            if (yahoolink) {
+                img.src = yahoolink;
+            } else {
+                img.src = `https://pinhole.finance.yahoo.com/chart/${document.getElementById('stockInput').value.trim().toUpperCase()}/__screenshot`;
+            }
             
             img.onload = () => {
                 iframe.src = "/imgview.html?img=" + img.src;
