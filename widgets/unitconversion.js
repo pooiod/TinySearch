@@ -58,5 +58,5 @@ var isMobile = false;
         iframe.contentWindow.document.write(html);
         iframe.contentWindow.document.close();        
     }, 1)
-    return`<iframe id="embedwidgetframe" style="border: none; width: 100%; height: 500px;"></iframe>`;
+    return`<iframe id="embedwidgetframe" style="border: none; width: 100%; height: 450px;"></iframe>`;
 };
