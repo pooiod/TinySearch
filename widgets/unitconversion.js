@@ -7,7 +7,7 @@ window.widgetmain = function(query) {
 	<link rel="stylesheet" href="//d15gdne58bo42a.cloudfront.net/style-n.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+<body style="background: transparent;">
 
 <div id="clear"></div>
 <div id="contentout">
@@ -58,5 +58,5 @@ var isMobile = false;
         iframe.contentWindow.document.write(html);
         iframe.contentWindow.document.close();        
     }, 1)
-    return`<iframe id="embedwidgetframe" style="border: none; width: 100%; height: 300px;"></iframe>`;
+    return`<iframe id="embedwidgetframe" style="border: none; width: 100%; height: 500px;"></iframe>`;
 };
