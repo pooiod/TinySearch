@@ -9,7 +9,7 @@ window.widgetmain = async function(query) {
 
     (async function() {
         const { ipv4, ipv6 } = await ipPromise;
-        // document.getElementById('ipv4').textContent = ipv4;
+        document.getElementById('ipv4').textContent = ipv4;
         document.getElementById('ipv6').textContent = ipv6;
     })();
 
@@ -38,8 +38,8 @@ window.widgetmain = async function(query) {
             }
         </style>
         <div class="ip-widget">
-            // <div class="ip-label">Your IPv4 Address:</div>
-            // <div class="ip-address" id="ipv4">Loading...</div>
+            <div class="ip-label" hidden>Your IPv4 Address:</div>
+            <div class="ip-address" id="ipv4" hidden>Loading...</div>
             <div class="ip-label">Your IPv6 Address:</div>
             <div class="ip-address" id="ipv6">Loading...</div>
         </div>
