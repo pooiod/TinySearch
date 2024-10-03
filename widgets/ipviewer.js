@@ -1,4 +1,4 @@
-window.widgetmain = function(query) {
+window.widgetmain = async function(query) {
     const ipPromise = (async () => {
         const ipv4Response = await fetch("https://api.ipify.org?format=json");
         const ipv4Data = await ipv4Response.json();
@@ -9,7 +9,7 @@ window.widgetmain = function(query) {
 
     (async function() {
         const { ipv4, ipv6 } = await ipPromise;
-        document.getElementById('ipv4').textContent = ipv4;
+        // document.getElementById('ipv4').textContent = ipv4;
         document.getElementById('ipv6').textContent = ipv6;
     })();
 
@@ -19,15 +19,12 @@ window.widgetmain = function(query) {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin: 20px;
-                padding: 20px;
-                border: 2px solid #ccc;
-                border-radius: 50px;
+                margin: 0px;
+                padding: 10px;
                 text-align: center;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             }
             #quick-answer .ip-address {
-                font-size: 24px;
+                font-size: 10px;
                 margin: 10px 0;
                 transition: filter 0.3s;
                 filter: blur(2px);
@@ -41,8 +38,8 @@ window.widgetmain = function(query) {
             }
         </style>
         <div class="ip-widget">
-            <div class="ip-label">Your IPv4 Address:</div>
-            <div class="ip-address" id="ipv4">Loading...</div>
+            // <div class="ip-label">Your IPv4 Address:</div>
+            // <div class="ip-address" id="ipv4">Loading...</div>
             <div class="ip-label">Your IPv6 Address:</div>
             <div class="ip-address" id="ipv6">Loading...</div>
         </div>
