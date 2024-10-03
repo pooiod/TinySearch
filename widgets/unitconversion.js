@@ -55,5 +55,5 @@ var isMobile = false;
     setTimeout(function(){
         document.getElementById('embedwidgetframe').contentWindow.document.body.innerHTML = html;
     }, 1)
-    return`<iframe id="embedwidgetframe"></iframe>`;
+    return`<iframe id="embedwidgetframe" style="border: none; width: 100%; height: 300px;"></iframe>`;
 };
