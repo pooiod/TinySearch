@@ -7,6 +7,12 @@ window.widgetmain = function(query) {
         return { ipv4: ipv4Data.ip, ipv6: ipv6Data.ip };
     })();
 
+    (async function() {
+        const { ipv4, ipv6 } = await ipPromise;
+        document.getElementById('ipv4').textContent = ipv4;
+        document.getElementById('ipv6').textContent = ipv6;
+    })();
+
     return `
         <style>
             #quick-answer .ip-widget {
@@ -16,7 +22,7 @@ window.widgetmain = function(query) {
                 margin: 20px;
                 padding: 20px;
                 border: 2px solid #ccc;
-                border-radius: 10px;
+                border-radius: 50px;
                 text-align: center;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             }
@@ -40,9 +46,5 @@ window.widgetmain = function(query) {
             <div class="ip-label">Your IPv6 Address:</div>
             <div class="ip-address" id="ipv6">Loading...</div>
         </div>
-    ` + (async function() {
-        const { ipv4, ipv6 } = await ipPromise;
-        document.getElementById('ipv4').textContent = ipv4;
-        document.getElementById('ipv6').textContent = ipv6;
-    })();
+    `;
 }
