@@ -50,7 +50,7 @@ window.widgetmain = function(query) {
         return null;
     };
 
-    return `
+    const html = `
         <style>
             #quick-answer .converter-widget {
                 display: flex;
@@ -102,14 +102,25 @@ window.widgetmain = function(query) {
             <button id="convertButton">Convert</button>
             <div class="result" id="result">Result: </div>
         </div>
-        <script>
-            document.getElementById('convertButton').onclick = function() {
-                const value = parseFloat(document.getElementById('value').value);
-                const fromUnit = document.getElementById('fromUnit').value;
-                const toUnit = document.getElementById('toUnit').value;
-                const result = convert(value, fromUnit, toUnit);
-                document.getElementById('result').textContent = 'Result: ' + (result !== null ? result : 'Invalid conversion');
-            };
-        </script>
     `;
+
+    const container = document.createElement('div');
+    container.innerHTML = html;
+
+    // Event handling
+    const convertButton = container.querySelector('#convertButton');
+    const valueInput = container.querySelector('#value');
+    const fromUnitSelect = container.querySelector('#fromUnit');
+    const toUnitSelect = container.querySelector('#toUnit');
+    const resultDisplay = container.querySelector('#result');
+
+    convertButton.addEventListener('click', () => {
+        const value = parseFloat(valueInput.value);
+        const fromUnit = fromUnitSelect.value;
+        const toUnit = toUnitSelect.value;
+        const result = convert(value, fromUnit, toUnit);
+        resultDisplay.textContent = 'Result: ' + (result !== null ? result : 'Invalid conversion');
+    });
+
+    return container.innerHTML; // Return the generated HTML
 };
