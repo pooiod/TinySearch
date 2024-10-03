@@ -29,7 +29,7 @@ window.widgetmain = function(query) {
                 font-size: 20px;
                 margin: 10px 0;
                 transition: filter 0.3s;
-                filter: blur(20px);
+                filter: blur(10px);
             }
             #quick-answer .ip-address:hover {
                 filter: blur(0);
