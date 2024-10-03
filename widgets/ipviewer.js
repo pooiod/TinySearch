@@ -13,7 +13,7 @@ window.widgetmain = function(query) {
             document.getElementById('ipv4').textContent = ipv4;
             document.getElementById('ipv6').textContent = ipv6;
         })();
-    }, 1000);
+    }, 500);
 
     return `
         <style>
