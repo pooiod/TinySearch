@@ -1,207 +1,57 @@
 window.widgetmain = function(query) {
-    const units = {
-        // Length
-        m: { name: "Meters", conversion: 1 },
-        cm: { name: "Centimeters", conversion: 0.01 },
-        km: { name: "Kilometers", conversion: 1000 },
-        mm: { name: "Millimeters", conversion: 0.001 },
-        in: { name: "Inches", conversion: 0.0254 },
-        ft: { name: "Feet", conversion: 0.3048 },
-        yd: { name: "Yards", conversion: 0.9144 },
-        mi: { name: "Miles", conversion: 1609.34 },
-        // Mass
-        g: { name: "Grams", conversion: 1 },
-        kg: { name: "Kilograms", conversion: 1000 },
-        mg: { name: "Milligrams", conversion: 0.001 },
-        oz: { name: "Ounces", conversion: 28.3495 },
-        lb: { name: "Pounds", conversion: 453.592 },
-        // Volume
-        l: { name: "Liters", conversion: 1 },
-        ml: { name: "Milliliters", conversion: 0.001 },
-        cup: { name: "Cups", conversion: 0.236588 },
-        pint: { name: "Pints", conversion: 0.473176 },
-        quart: { name: "Quarts", conversion: 0.946353 },
-        gal: { name: "Gallons", conversion: 3.78541 },
-        // Temperature
-        "°C": { name: "Celsius", conversion: x => x + 273.15 },
-        "°F": { name: "Fahrenheit", conversion: x => (x - 32) * 5 / 9 + 273.15 },
-        K: { name: "Kelvin", conversion: x => x },
-        // Area
-        acre: { name: "Acres", conversion: 4046.86 },
-        ha: { name: "Hectares", conversion: 10000 },
-        sqft: { name: "Square Feet", conversion: 0.092903 },
-        sqm: { name: "Square Meters", conversion: 1 },
-        // Time
-        s: { name: "Seconds", conversion: 1 },
-        min: { name: "Minutes", conversion: 60 },
-        h: { name: "Hours", conversion: 3600 },
-        // Speed
-        'm/s': { name: "Meters per Second", conversion: 1 },
-        'km/h': { name: "Kilometers per Hour", conversion: 0.277778 },
-        'mi/h': { name: "Miles per Hour", conversion: 0.44704 }
-    };
+    return`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>Unit Converter</title>
+	<link rel="stylesheet" href="//d15gdne58bo42a.cloudfront.net/style-n.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
 
-    const incompatibleConversions = [
-        { from: "°F", to: "cm" },
-        { from: "°F", to: "m" },
-        { from: "°F", to: "km" },
-        { from: "°F", to: "mm" },
-        { from: "°F", to: "in" },
-        { from: "°F", to: "ft" },
-        { from: "°F", to: "yd" },
-        { from: "°F", to: "mi" },
-        { from: "°F", to: "g" },
-        { from: "°F", to: "kg" },
-        { from: "°F", to: "mg" },
-        { from: "°F", to: "oz" },
-        { from: "°F", to: "lb" },
-        { from: "°F", to: "l" },
-        { from: "°F", to: "ml" },
-        { from: "°F", to: "cup" },
-        { from: "°F", to: "pint" },
-        { from: "°F", to: "quart" },
-        { from: "°F", to: "gal" },
-        { from: "°F", to: "acre" },
-        { from: "°F", to: "ha" },
-        { from: "°F", to: "sqft" },
-        { from: "°F", to: "sqm" },
-        { from: "°F", to: "s" },
-        { from: "°F", to: "min" },
-        { from: "°F", to: "h" },
-        { from: "°F", to: "m/s" },
-        { from: "°F", to: "km/h" },
-        { from: "°F", to: "mi/h" }
-    ];
+<div id="clear"></div>
+<div id="contentout">
+	<div id="content">
 
-    const convert = (value, fromUnit, toUnit) => {
-        if (fromUnit in units && toUnit in units) {
-            const baseValue = typeof units[fromUnit].conversion === 'function' ? units[fromUnit].conversion(value) : value * units[fromUnit].conversion;
-            return baseValue / units[toUnit].conversion;
-        }
-        return null;
-    };
+<div id="unquickcalc" style="display:none;"></div>
+<div id="menu"><ul><li id="menuon"><a href="javascript:popMenu(&quot;Length&quot;);showSel(lA);">Length</a></li> <li><a href="javascript:popMenu(&quot;Temperature&quot;);showSel(tA);">Temperature</a></li> <li><a href="javascript:popMenu(&quot;Area&quot;);showSel(aA);">Area</a></li> <li><a href="javascript:popMenu(&quot;Volume&quot;);showSel(vA);">Volume</a></li> <li><a href="javascript:popMenu(&quot;Weight&quot;);showSel(wA);">Weight</a></li> <li><a href="javascript:popMenu(&quot;Time&quot;);showSel(mA);">Time</a></li> </ul></div>
+<script>
+var isMobile = false;
+</script>
+<div id="qcvt">
+<table border="0" align="center" style="padding-top:5px;">
+<form name="calForm">
+	<tr><td><label for="fromVal"><b>From:</b></label></td><td>&nbsp;</td><td><label for="toVal"><b>To:</b></label></td></tr>
+	<tr><td><input type="text" name="fromVal" id="fromVal" onKeyUp="calcul();" class="ucinput" autofocus></td><td>&nbsp;</td><td><input type="text" id="toVal" name="toVal" style="background-color:#eeeeee;" class="ucinput" readonly></td></tr>
+	<tr><td style="padding-top:8px;"><select name="calFrom" id="calFrom" onChange="calcul();" size="11" class="ucselect"></select></td><td>&nbsp;</td><td style="padding-top:8px;"><select name="calTo" id="calTo" size="11" onChange="calcul();" class="ucselect"></select></td></tr>
+</form>
+</table>
+<br><div id="calResults"></div>
+</div>
 
-    const html = `
-        <style>
-            #quick-answer .converter-widget {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin: 20px;
-                padding: 20px;
-                border: 2px solid #ccc;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                background-color: #f9f9f9;
-            }
-            #quick-answer h2 {
-                margin-bottom: 20px;
-                color: #333;
-            }
-            #quick-answer .input-group {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-            #quick-answer input[type="number"] {
-                font-size: 20px;
-                padding: 10px;
-                width: 80%;
-                margin: 10px 0;
-                border: 1px solid #aaa;
-                border-radius: 5px;
-            }
-            #quick-answer .unit-select {
-                font-size: 18px;
-                padding: 10px;
-                margin: 5px 0;
-                width: 80%;
-                border: 1px solid #aaa;
-                border-radius: 5px;
-                background-color: white;
-            }
-            #quick-answer .convert-button {
-                font-size: 20px;
-                padding: 10px 20px;
-                margin-top: 10px;
-                border: none;
-                border-radius: 5px;
-                background-color: #007BFF;
-                color: white;
-                cursor: pointer;
-                transition: background 0.3s;
-            }
-            #quick-answer .convert-button:hover {
-                background-color: #0056b3;
-            }
-            #quick-answer .result {
-                margin-top: 20px;
-                font-size: 22px;
-                font-weight: bold;
-                color: #333;
-            }
-            #quick-answer .error {
-                color: red;
-                font-weight: bold;
-                margin-top: 10px;
-            }
-        </style>
-        <div class="converter-widget">
-            <h2>Unit Converter</h2>
-            <div class="input-group">
-                <input type="number" id="value" placeholder="Value to convert" />
-                <select id="fromUnit" class="unit-select"></select>
-                <select id="toUnit" class="unit-select"></select>
-                <button id="convertButton" class="convert-button">Convert</button>
-                <div class="result" id="result">Result: </div>
-                <div class="error" id="error"></div>
-            </div>
-        </div>
-    `;
 
-    // Populate the dropdowns
-    setTimeout(() => {
-        const fromUnitSelect = document.getElementById('fromUnit');
-        const toUnitSelect = document.getElementById('toUnit');
+<br><div id="findutoc" hidden>
+<h3>Find the Units to Convert</h3>
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+<form>
+	<tr><td><label for="fromunit"><b>From Unit:</b></label></td><td>&nbsp;</td><td><label for="tounit"><b>To Unit:</b></label></td></tr>
+	<tr>
+		<td><input type="text" name="fromunit" id="fromunit" onKeyUp="findUnit();" class="ucinput" placeholder="e.g. kilogram"></td>
+		<td>&nbsp;</td>
+		<td><input type="text" name="tounit" id="tounit" onKeyUp="findUnit();" class="ucinput" placeholder="e.g. lbs"></td>
+	</tr>
+</form>
+</table>
+<div id="futcResult"></div>
+</div>
 
-        for (const unit in units) {
-            const option = document.createElement('option');
-            option.value = unit;
-            option.textContent = units[unit].name;
-            fromUnitSelect.appendChild(option);
-            const option2 = option.cloneNode(true);
-            toUnitSelect.appendChild(option2);
-        }
+<script src="//d15gdne58bo42a.cloudfront.net/js/homeunit.js" async></script>
+<script src="//d15gdne58bo42a.cloudfront.net/js/common.js" async></script>
 
-        const convertButton = document.getElementById('convertButton');
-        const valueInput = document.getElementById('value');
-        const resultDiv = document.getElementById('result');
-        const errorDiv = document.getElementById('error');
-
-        convertButton.onclick = function() {
-            const value = parseFloat(valueInput.value);
-            const fromUnit = fromUnitSelect.value;
-            const toUnit = toUnitSelect.value;
-
-            // Check for incompatible conversions
-            const isIncompatible = incompatibleConversions.some(pair => 
-                (pair.from === fromUnit && pair.to === toUnit) || 
-                (pair.from === toUnit && pair.to === fromUnit)
-            );
-
-            if (isIncompatible) {
-                errorDiv.textContent = 'Incompatible conversion! Please select valid units.';
-                resultDiv.textContent = 'Result: ';
-                return;
-            } else {
-                errorDiv.textContent = '';
-            }
-
-            const result = convert(value, fromUnit, toUnit);
-            resultDiv.textContent = 'Result: ' + (result !== null ? result.toFixed(2) : 'Invalid conversion');
-        };
-    }, 0); // Use setTimeout to wait for DOM elements to be created
-
-    return html;
+	</div>
+</div>
+</body>
+</html>
+`;
 };
