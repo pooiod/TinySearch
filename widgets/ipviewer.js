@@ -42,7 +42,7 @@ window.widgetmain = function(query) {
         <div class="ip-widget">
             <div class="ip-label" hidden>Your IPv4 Address:</div>
             <div class="ip-address" id="ipv4" hidden>Loading...</div>
-            <div class="ip-label">Your IPv6 Address:</div>
+            <div class="ip-label">Your IP Address:</div>
             <div class="ip-address" id="ipv6">Loading...</div>
         </div>
     `;
