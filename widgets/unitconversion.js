@@ -1,5 +1,5 @@
 window.widgetmain = function(query) {
-    return`
+    return`<iframe>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,5 +53,5 @@ var isMobile = false;
 </div>
 </body>
 </html>
-`;
+</iframe>`;
 };
