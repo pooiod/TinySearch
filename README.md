@@ -1,5 +1,5 @@
 # TinySearch
-TinySearch is a lightweight, dynamic search engine built on DuckDuckGo's API. It offers a fast, minimalist user experience while maintaining privacy and security. Despite its compact design, TinySearch delivers vibrant animations and an engaging interface that enhances user interaction. Perfect for those who prioritize simplicity without compromising on visual appeal or functionality.
+TinySearch is a lightweight, dynamic search engine built on DuckDuckGo's API. It offers a fast, minimalist user experience while maintaining privacy and security. Despite its compact design, TinySearch delivers subtle animations and an engaging interface that enhances user interaction. Perfect for those who prioritize simplicity without compromising on visual appeal or functionality.
 
 [![](https://raw.githubusercontent.com/pooiod/TinySearch/refs/heads/main/icon.png)](https://penguinpaint.pages.dev/?import=https://raw.githubusercontent.com/pooiod/TinySearch/refs/heads/main/search.svg "icon")
 
@@ -13,5 +13,4 @@ TinySearch is a lightweight, dynamic search engine built on DuckDuckGo's API. It
 
 <br>
 
-> Please note: this project is new, and may have bugs. 
-> Please report any issues in the [issues](https://github.com/pooiod/TinySearch/issues) tab
+> Please report any bugs in the [issues](https://github.com/pooiod/TinySearch/issues) tab
