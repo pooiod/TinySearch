@@ -436,7 +436,7 @@ Try to include resource links aswell.`, "gpt-4o");
 
         setTimeout(function(){
             if (query.toLowerCase().replace(/\s+/g, '') === "happywheels") {
-                addCard("Happy wheels (mirror)", "Happy wheels, but unblocked", "https://happywheelsunoficialmirror.great-site.net/game.html", "https://happywheelsunoficialmirror.great-site.net/ref/tinysearch.html#09328", "https://cdn2.steamgriddb.com/icon_thumb/288cd2567953f06e460a33951f55daaf.png");
+                addCard("Happy wheels (mirror)", "Happy wheels, but unblocked", "https://happywheelsunoficialmirror.great-site.net/game.html", "https://happywheelsunoficialmirror.great-site.net/ref/tinysearch.html#09328", "https://cdn2.steamgriddb.com/icon_thumb/288cd2567953f06e460a33951f55daaf.png", true);
             }
         }, 500);
 
@@ -475,14 +475,14 @@ Try to include resource links aswell.`, "gpt-4o");
         }, 100);
     }
 
-    function addCard(title, description, link, fullurl, image) {
+    function addCard(title, description, link, fullurl, image, force) {
         if (fullurl == "/") {
             return;
         }
 
         did = true;
         
-        if (!image || title) {
+        if (!image || (title && !force)) {
             image = "https://www.google.com/s2/favicons?domain=" + fullurl;
         }
 
