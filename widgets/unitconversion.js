@@ -12,22 +12,10 @@ window.widgetmain = function(query) {
       box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
-    body, html {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #333;
-    }
-    
+
     #contentout {
       width: 100%;
       height: 100%;
-      /*max-width: 500px;*/
-      /*background: white;*/
-      /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-      /*border-radius: 8px;*/
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -42,9 +30,13 @@ window.widgetmain = function(query) {
 
     #menu ul {
       display: flex;
+      overflow: auto;
       justify-content: space-around;
       list-style: none;
       margin-bottom: 15px;
+      border-radius: 5.5px;
+      background: #fff;
+      border: 1px solid #ccc;
     }
     #menu li {
       flex: 1;
@@ -96,24 +88,6 @@ window.widgetmain = function(query) {
     select {
       height: 100%;
     }
-
-    @media (max-width: 480px) {
-      /*#contentout {*/
-      /*  padding: 15px;*/
-      /*}*/
-      /*#menu ul {*/
-      /*  flex-direction: column;*/
-      /*}*/
-      /*#menu li {*/
-      /*  margin-bottom: 8px;*/
-      /*}*/
-      /*.ucinput, .ucselect {*/
-      /*  font-size: 0.9rem;*/
-      /*}*/
-      #menu {
-        overflow: auto;
-      }
-    }
   </style>
 </head>
 <body>
@@ -162,8 +136,7 @@ window.widgetmain = function(query) {
 <script src="//d15gdne58bo42a.cloudfront.net/js/common.js" async></script>
 
 </body>
-</html>
-`;
+</html>`;
     setTimeout(function(){
         var iframe = document.getElementById('embedwidgetframe');
         iframe.contentWindow.document.open();
