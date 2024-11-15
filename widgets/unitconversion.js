@@ -2,55 +2,168 @@ window.widgetmain = function(query) {
     var html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>Unit Converter</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Unit Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body, html {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+    
+    #contentout {
+      width: 100%;
+      height: 100%;
+      /*max-width: 500px;*/
+      /*background: white;*/
+      /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+      /*border-radius: 8px;*/
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    #content {
+      height: 100%;
+    }
+    form {
+      height: 100%;
+    }
+
+    #menu ul {
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+      margin-bottom: 15px;
+    }
+    #menu li {
+      flex: 1;
+      text-align: center;
+    }
+    #menu a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+    #menu a:hover {
+      background-color: #6eb4ff;
+      color: white;
+    }
+    #menu li#menuon a {
+      background-color: #007bff;
+      color: white;
+    }
+
+    table {
+      width: 100%;
+      height: 100%;
+      margin-top: 10px;
+    }
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .ucinput {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+    .ucselect {
+      width: 100%;
+      height: calc(100vh - 175px);
+      padding: 10px;
+      font-size: 1rem;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    select {
+      height: 100%;
+    }
+
+    @media (max-width: 480px) {
+      /*#contentout {*/
+      /*  padding: 15px;*/
+      /*}*/
+      /*#menu ul {*/
+      /*  flex-direction: column;*/
+      /*}*/
+      /*#menu li {*/
+      /*  margin-bottom: 8px;*/
+      /*}*/
+      /*.ucinput, .ucselect {*/
+      /*  font-size: 0.9rem;*/
+      /*}*/
+      #menu {
+        overflow: auto;
+      }
+    }
+  </style>
 </head>
-<body style="background: transparent;">
+<body>
 
-<div id="clear"></div>
 <div id="contentout">
-	<div id="content">
+  <div id="content">
 
-<div id="unquickcalc" style="display:none;"></div>
-<div id="menu"><ul><li id="menuon"><a href="javascript:popMenu(&quot;Length&quot;);showSel(lA);">Length</a></li> <li><a href="javascript:popMenu(&quot;Temperature&quot;);showSel(tA);">Temperature</a></li> <li><a href="javascript:popMenu(&quot;Area&quot;);showSel(aA);">Area</a></li> <li><a href="javascript:popMenu(&quot;Volume&quot;);showSel(vA);">Volume</a></li> <li><a href="javascript:popMenu(&quot;Weight&quot;);showSel(wA);">Weight</a></li> <li><a href="javascript:popMenu(&quot;Time&quot;);showSel(mA);">Time</a></li> </ul></div>
-<script>
-var isMobile = false;
-</script>
-<div id="qcvt">
-<table border="0" align="center" style="padding-top:5px;">
-<form name="calForm">
-	<tr><td><label for="fromVal"><b>From:</b></label></td><td>&nbsp;</td><td><label for="toVal"><b>To:</b></label></td></tr>
-	<tr><td><input type="text" name="fromVal" id="fromVal" onKeyUp="calcul();" class="ucinput" autofocus></td><td>&nbsp;</td><td><input type="text" id="toVal" name="toVal" style="background-color:#eeeeee;" class="ucinput" readonly></td></tr>
-	<tr><td style="padding-top:8px;"><select name="calFrom" id="calFrom" onChange="calcul();" size="11" class="ucselect"></select></td><td>&nbsp;</td><td style="padding-top:8px;"><select name="calTo" id="calTo" size="11" onChange="calcul();" class="ucselect"></select></td></tr>
-</form>
-</table>
-<br><div id="calResults"></div>
-</div>
+    <div id="menu">
+      <ul>
+        <li id="menuon"><a href="javascript:popMenu('Length');showSel(lA);">Length</a></li>
+        <li><a href="javascript:popMenu('Temperature');showSel(tA);">Temperature</a></li>
+        <li><a href="javascript:popMenu('Area');showSel(aA);">Area</a></li>
+        <li><a href="javascript:popMenu('Volume');showSel(vA);">Volume</a></li>
+        <li><a href="javascript:popMenu('Weight');showSel(wA);">Weight</a></li>
+        <li><a href="javascript:popMenu('Time');showSel(mA);">Time</a></li>
+      </ul>
+    </div>
 
+    <div id="qcvt">
+      <form name="calForm">
+        <table border="0" align="center">
+          <tr>
+            <td><label for="fromVal">From:</label></td>
+            <td></td>
+            <td><label for="toVal">To:</label></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="fromVal" id="fromVal" onKeyUp="calcul();" class="ucinput" autofocus></td>
+            <td></td>
+            <td><input type="text" id="toVal" name="toVal" class="ucinput" readonly style="background-color:#eeeeee;"></td>
+          </tr>
+          <tr>
+            <td><select name="calFrom" id="calFrom" onChange="calcul();" size="5" class="ucselect"></select></td>
+            <td></td>
+            <td><select name="calTo" id="calTo" size="5" onChange="calcul();" class="ucselect"></select></td>
+          </tr>
+        </table>
+      </form>
+      <div id="calResults"></div>
+    </div>
 
-<br><div id="findutoc" hidden>
-<h3>Find the Units to Convert</h3>
-<table align="center" border="0" cellspacing="0" cellpadding="0">
-<form>
-	<tr><td><label for="fromunit"><b>From Unit:</b></label></td><td>&nbsp;</td><td><label for="tounit"><b>To Unit:</b></label></td></tr>
-	<tr>
-		<td><input type="text" name="fromunit" id="fromunit" onKeyUp="findUnit();" class="ucinput" placeholder="e.g. kilogram"></td>
-		<td>&nbsp;</td>
-		<td><input type="text" name="tounit" id="tounit" onKeyUp="findUnit();" class="ucinput" placeholder="e.g. lbs"></td>
-	</tr>
-</form>
-</table>
-<div id="futcResult"></div>
+  </div>
 </div>
 
 <script src="//d15gdne58bo42a.cloudfront.net/js/homeunit.js" async></script>
 <script src="//d15gdne58bo42a.cloudfront.net/js/common.js" async></script>
 
-	</div>
-</div>
 </body>
-</html>`;
+</html>
+`;
     setTimeout(function(){
         var iframe = document.getElementById('embedwidgetframe');
         iframe.contentWindow.document.open();
