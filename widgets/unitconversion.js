@@ -13,6 +13,15 @@ window.widgetmain = function(query) {
       font-family: Arial, sans-serif;
     }
 
+    body, html {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
     #contentout {
       width: 100%;
       height: 100%;
