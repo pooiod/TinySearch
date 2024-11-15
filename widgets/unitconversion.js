@@ -4,7 +4,6 @@ window.widgetmain = function(query) {
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<title>Unit Converter</title>
-	<link rel="stylesheet" href="//d15gdne58bo42a.cloudfront.net/style-n.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="background: transparent;">
