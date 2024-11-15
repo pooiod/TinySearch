@@ -88,6 +88,16 @@ window.widgetmain = function(query) {
     select {
       height: 100%;
     }
+    
+    #calResults {
+      position: fixed;
+      bottom: 10px;
+      border-radius: 4px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 5px;
+      max-width: calc(100vw - 40px);
+    }
   </style>
 </head>
 <body>
