@@ -726,7 +726,7 @@ Try to include resource links aswell.`, "gpt-4o");
     }
 
     async function searchBackground(query) {
-        const searchUrl = `https://test.cors.workers.dev/?${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
+        const searchUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent("http://frogfind.com/?q=" + query)}`;
 
         try {
             const response = await fetch(searchUrl);
